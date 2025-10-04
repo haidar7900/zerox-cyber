@@ -1,0 +1,400 @@
+/* enhanced-styles.css - تنسيقات الإضافات المتقدمة */
+
+/* زر تبديل اللغة */
+.language-switch {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.lang-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e6eef6;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Tajawal', sans-serif;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.lang-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* قسم الوضع المتقدم */
+.advanced-section {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.advanced-options {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.advanced-options button {
+    background: linear-gradient(45deg, #2dd4bf, #a78bfa);
+    color: #041025;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 150px;
+}
+
+.advanced-options button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4);
+}
+
+/* واجهة اللعبة المتقدمة */
+.advanced-game-interface {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #041025, #081426);
+    z-index: 2000;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.advanced-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.advanced-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.advanced-stats span {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.advanced-question {
+    background: #0b1220;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.advanced-question h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: #e6eef6;
+    line-height: 1.5;
+}
+
+.advanced-answers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.advanced-answers button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e6eef6;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Tajawal', sans-serif;
+    text-align: right;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.advanced-answers button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-5px);
+}
+
+.advanced-answers button:active {
+    transform: translateX(-2px);
+}
+
+/* الرسائل والإشعارات */
+.message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 10px;
+    color: white;
+    z-index: 3000;
+    animation: slideInRight 0.3s ease;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.message.success {
+    background: linear-gradient(45deg, #2ed573, #1dd1a1);
+}
+
+.message.error {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+}
+
+.message.info {
+    background: linear-gradient(45deg, #3742fa, #5352ed);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* النوافذ المنبثقة */
+.achievements-modal,
+.challenge-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #0b1220, #07101b);
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h2 {
+    color: #e6eef6;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+/* قائمة الإنجازات */
+.achievements-list {
+    margin: 20px 0;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.achievement-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+}
+
+.achievement-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.achievement-info h4 {
+    color: #e6eef6;
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+}
+
+.achievement-info p {
+    color: #94a3b8;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* تحديات اليوم */
+.challenge-reward {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(45, 212, 191, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(45, 212, 191, 0.3);
+}
+
+.challenge-reward span {
+    color: #e6eef6;
+    font-weight: 600;
+}
+
+/* الأزرار في النوافذ */
+.modal-content button {
+    background: linear-gradient(45deg, #2dd4bf, #a78bfa);
+    color: #041025;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.modal-content button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4);
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .language-switch {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .lang-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .advanced-options {
+        flex-direction: column;
+    }
+    
+    .advanced-options button {
+        min-width: auto;
+    }
+    
+    .advanced-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .advanced-stats {
+        justify-content: center;
+    }
+    
+    .modal-content {
+        padding: 20px;
+        margin: 20px;
+    }
+    
+    .challenge-reward {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .advanced-question {
+        padding: 15px;
+    }
+    
+    .advanced-answers button {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+    
+    .achievement-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+/* تأثيرات خاصة للوضع المتقدم */
+.advanced-mode-active {
+    background: linear-gradient(135deg, #041025, #0f1a38);
+}
+
+.advanced-section .card {
+    background: linear-gradient(135deg, #0b1220, #0f1a38);
+    border: 1px solid rgba(45, 212, 191, 0.3);
+}
+
+/* شارات التقدم */
+.progress-ring {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(#2dd4bf var(--progress), #2d3748 0%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.progress-ring::before {
+    content: attr(data-progress) '%';
+    position: absolute;
+    color: #e6eef6;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* رسوم متحركة للنجوم */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.floating-star {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* تأثيرات النص المتقدم */
+.text-glow {
+    text-shadow: 0 0 10px rgba(45, 212, 191, 0.5);
+}
+
+/* أزرار تفاعلية */
+.btn-pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(45, 212, 191, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+}
