@@ -6,16 +6,245 @@
     <title>مدافع الأمن السيبراني - فريق Zerox</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- تنسيقات الإضافات الجديدة -->
+    <style>
+        .language-switch {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e6eef6;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .advanced-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .advanced-options {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .advanced-options button {
+            background: linear-gradient(45deg, #2dd4bf, #a78bfa);
+            color: #041025;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .advanced-options button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4);
+        }
+
+        .enhanced-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            color: white;
+            z-index: 3000;
+            animation: slideInRight 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .enhanced-message.success {
+            background: linear-gradient(45deg, #2ed573, #1dd1a1);
+        }
+
+        .enhanced-message.info {
+            background: linear-gradient(45deg, #3742fa, #5352ed);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .language-switch {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .advanced-options {
+                flex-direction: column;
+            }
+            
+            .advanced-options button {
+                min-width: auto;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="root"></div>
+    
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel" src="app.js"></script>
     
-    <!-- ⭐⭐ الإضافات الجديدة ⭐⭐ -->
-    <link rel="stylesheet" href="enhanced-styles.css">
-    <script src="zerox-enhanced.js"></script>
+    <!-- الإضافات الجديدة -->
+    <script>
+        // zerox-enhanced.js - مضمن في الصفحة
+        console.log('🚀 Zerox Enhanced - جاهز للتحميل!');
+
+        class ZeroxEnhanced {
+            constructor() {
+                this.currentLanguage = 'ar';
+                this.init();
+            }
+
+            init() {
+                // انتظر حتى تحمل اللعبة الأساسية
+                setTimeout(() => {
+                    this.addLanguageSwitch();
+                    this.addAdvancedSection();
+                    console.log('✅ Zerox Enhanced - تم التثبيت!');
+                }, 2000);
+            }
+
+            addLanguageSwitch() {
+                const header = document.querySelector('.header');
+                if (header) {
+                    const languageSwitch = document.createElement('div');
+                    languageSwitch.className = 'language-switch';
+                    languageSwitch.innerHTML = `
+                        <button class="lang-btn" onclick="zeroxEnhanced.switchLanguage('ar')">🌐 العربية</button>
+                        <button class="lang-btn" onclick="zeroxEnhanced.switchLanguage('en')">🌐 English</button>
+                    `;
+                    header.style.position = 'relative';
+                    header.appendChild(languageSwitch);
+                }
+            }
+
+            addAdvancedSection() {
+                const mainContent = document.querySelector('.main-content');
+                if (mainContent) {
+                    const advancedSection = document.createElement('div');
+                    advancedSection.className = 'advanced-section';
+                    advancedSection.innerHTML = `
+                        <div class="card">
+                            <h3>🎯 الوضع المتقدم</h3>
+                            <p style="color: #94a3b8; margin-bottom: 15px;">استكشف ميزات إضافية وأسئلة متقدمة</p>
+                            <div class="advanced-options">
+                                <button onclick="zeroxEnhanced.showMessage('🚀 نظام الأسئلة المتقدمة قريباً!')">
+                                    🚀 الأسئلة المتقدمة
+                                </button>
+                                <button onclick="zeroxEnhanced.showMessage('🏆 نظام الإنجازات والتحديات قريباً!')">
+                                    🏆 التحديات اليومية
+                                </button>
+                                <button onclick="zeroxEnhanced.showMessage('📊 لوحة المتصدرين قريباً!')">
+                                    📊 لوحة المتصدرين
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    mainContent.appendChild(advancedSection);
+                }
+            }
+
+            switchLanguage(lang) {
+                this.currentLanguage = lang;
+                if (lang === 'ar') {
+                    this.showMessage('🌐 تم التبديل إلى اللغة العربية');
+                    document.documentElement.dir = 'rtl';
+                    document.documentElement.lang = 'ar';
+                } else {
+                    this.showMessage('🌐 Switched to English');
+                    document.documentElement.dir = 'ltr';
+                    document.documentElement.lang = 'en';
+                }
+            }
+
+            showMessage(message) {
+                // إزالة أي رسالة سابقة
+                const oldMessage = document.querySelector('.enhanced-message');
+                if (oldMessage) {
+                    oldMessage.remove();
+                }
+
+                // إنشاء رسالة جديدة
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'enhanced-message info';
+                messageDiv.textContent = message;
+                
+                document.body.appendChild(messageDiv);
+                
+                // إزالة الرسالة بعد 3 ثواني
+                setTimeout(() => {
+                    if (messageDiv.parentElement) {
+                        messageDiv.remove();
+                    }
+                }, 3000);
+            }
+
+            // دالة مساعدة للترجمة (يمكن تطويرها لاحقاً)
+            translate(key) {
+                const translations = {
+                    ar: {
+                        title: "مدافع الأمن السيبراني",
+                        start: "ابدأ اللعبة",
+                        advanced: "الوضع المتقدم"
+                    },
+                    en: {
+                        title: "Cyber Defender",
+                        start: "Start Game", 
+                        advanced: "Advanced Mode"
+                    }
+                };
+                return translations[this.currentLanguage]?.[key] || key;
+            }
+        }
+
+        // تشغيل النظام عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            window.zeroxEnhanced = new ZeroxEnhanced();
+        });
+    </script>
 </body>
 </html>
