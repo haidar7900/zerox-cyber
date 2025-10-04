@@ -1,0 +1,363 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: linear-gradient(to bottom, #041025, #081426);
+  color: #e6eef6;
+  direction: rtl;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* التنسيقات الأساسية */
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 80rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #2dd4bf, #a78bfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #041025;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.designer {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.main-content {
+  grid-column: span 2;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card {
+  background: #0b1220;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(3,7,18,0.6);
+}
+
+.card-light {
+  background: #07101b;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+/* أزرار */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.btn-primary {
+  background: linear-gradient(to right, #2dd4bf, #a78bfa);
+  color: #041025;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 212, 191, 0.3);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e6eef6;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-small {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+/* شريط التقدم */
+.progress-container {
+  margin: 0.75rem 0;
+}
+
+.progress-bar {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 9999px;
+  overflow: hidden;
+  height: 0.75rem;
+}
+
+.progress-fill {
+  background: linear-gradient(to right, #2dd4bf, #a78bfa);
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+/* الأسئلة */
+.question-text {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.answers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.answer-btn {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: none;
+  color: #e6eef6;
+  cursor: pointer;
+  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.answer-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.answer-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.answer-btn.selected {
+  box-shadow: 0 0 0 2px #2dd4bf;
+  background: rgba(45, 212, 191, 0.2);
+}
+
+.answer-number {
+  font-weight: 700;
+  margin-left: 0.5rem;
+}
+
+.answer-text {
+  flex: 1;
+}
+
+/* شريط المعلومات */
+.info-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stat {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tool {
+  font-size: 0.875rem;
+}
+
+/* أدوات اللعبة */
+.game-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* الشاشات */
+.screen {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.big-score {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.message {
+  color: #94a3b8;
+  margin-bottom: 1rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* القائمة */
+.difficulty-selector {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.diff-btn {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+  background: rgba(255, 255, 255, 0.02);
+  color: #e6eef6;
+}
+
+.diff-btn.active {
+  background: #0d9488;
+  color: #041025;
+  font-weight: 700;
+}
+
+/* الكونفيتي */
+.confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* القائمة */
+.rules-list {
+  list-style-type: disc;
+  margin-right: 1.5rem;
+  color: #94a3b8;
+  margin-bottom: 1rem;
+}
+
+.rules-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* responsive */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+@media (min-width: 640px) {
+  .answers-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .stats {
+    gap: 1rem;
+  }
+}
+
+/* تصميم المطور */
+.dev-card {
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.1), rgba(167, 139, 250, 0.1));
+  border: 1px solid rgba(45, 212, 191, 0.2);
+}
+
+/* إشعارات */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #0d9488;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 1001;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* تأثيرات النص */
+.text-gradient {
+  background: linear-gradient(135deg, #2dd4bf, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
