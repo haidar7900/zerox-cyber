@@ -35,6 +35,12 @@
             transform: translateY(-2px);
         }
 
+        .lang-btn.active {
+            background: linear-gradient(45deg, #2dd4bf, #a78bfa);
+            color: #041025;
+            font-weight: bold;
+        }
+
         .advanced-section {
             margin-top: 25px;
             padding-top: 20px;
@@ -67,6 +73,77 @@
             box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4);
         }
 
+        /* نافذة التحدي اليومي */
+        .challenge-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 4000;
+            backdrop-filter: blur(5px);
+        }
+
+        .challenge-content {
+            background: linear-gradient(135deg, #0b1220, #07101b);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .challenge-question {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #e6eef6;
+            line-height: 1.5;
+        }
+
+        .challenge-answers {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .challenge-answer {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e6eef6;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: right;
+            transition: all 0.3s ease;
+        }
+
+        .challenge-answer:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-5px);
+        }
+
+        .challenge-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .challenge-buttons button {
+            background: linear-gradient(45deg, #2dd4bf, #a78bfa);
+            color: #041025;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
         .enhanced-message {
             position: fixed;
             top: 20px;
@@ -82,6 +159,10 @@
 
         .enhanced-message.success {
             background: linear-gradient(45deg, #2ed573, #1dd1a1);
+        }
+
+        .enhanced-message.error {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
         }
 
         .enhanced-message.info {
@@ -136,14 +217,100 @@
         class ZeroxEnhanced {
             constructor() {
                 this.currentLanguage = 'ar';
+                this.translations = this.loadTranslations();
                 this.init();
             }
 
+            loadTranslations() {
+                return {
+                    ar: {
+                        // الهيدر
+                        title: "مدافع الأمن السيبراني",
+                        subtitle: "لعبة تعليمية عن الأمن السيبراني — فريق Zerox",
+                        designer: "تصميم: المهندس حيدر الجنابي",
+                        
+                        // شاشة الترحيب
+                        welcome: "أهلاً بك أيها المدافع 🛡️",
+                        welcomeDesc: "احمِ الحسابات وتعلم أساسيات الحماية عبر أسئلة قصيرة وتحديات سريعة.",
+                        startGame: "🎮 ابدأ اللعبة",
+                        howToPlay: "📖 كيف تُلعب",
+                        chooseLevel: "اختر مستوى:",
+                        easy: "🟢 سهلة",
+                        medium: "🟡 متوسطة", 
+                        hard: "🔴 صعبة",
+                        
+                        // الشريط الجانبي
+                        progress: "📈 التقدم",
+                        levelInfo: "مستوى واحد = 5 أسئلة",
+                        question: "السؤال",
+                        gameLevel: "🎯 مستوى اللعبة",
+                        chooseLevelDesc: "اختر مستوى قبل البدء",
+                        highscore: "⭐ سجل اللعبة",
+                        highscoreDesc: "أعلى نتيجة",
+                        deleteRecord: "🗑️ حذف السجل",
+                        copy: "📋 نسخ",
+                        
+                        // التحدي اليومي
+                        dailyChallenge: "التحدي اليومي",
+                        challengeDesc: "اكسب 200 نقطة إضافية!",
+                        startChallenge: "بدء التحدي",
+                        close: "إغلاق",
+                        
+                        // الوضع المتقدم
+                        advancedMode: "🎯 الوضع المتقدم",
+                        advancedDesc: "استكشف ميزات إضافية وأسئلة متقدمة",
+                        advancedQuestions: "🚀 الأسئلة المتقدمة",
+                        achievements: "🏆 التحديات اليومية",
+                        leaderboard: "📊 لوحة المتصدرين"
+                    },
+                    en: {
+                        // Header
+                        title: "Cyber Defender",
+                        subtitle: "Educational cybersecurity game — Zerox Team", 
+                        designer: "Design: Engineer Haider Al-Janabi",
+                        
+                        // Welcome screen
+                        welcome: "Welcome Defender 🛡️",
+                        welcomeDesc: "Protect accounts and learn security basics through short questions and quick challenges.",
+                        startGame: "🎮 Start Game",
+                        howToPlay: "📖 How to Play",
+                        chooseLevel: "Choose level:",
+                        easy: "🟢 Easy",
+                        medium: "🟡 Medium",
+                        hard: "🔴 Hard",
+                        
+                        // Sidebar
+                        progress: "📈 Progress", 
+                        levelInfo: "One level = 5 questions",
+                        question: "Question",
+                        gameLevel: "🎯 Game Level",
+                        chooseLevelDesc: "Choose level before starting",
+                        highscore: "⭐ Highscore",
+                        highscoreDesc: "Highest score",
+                        deleteRecord: "🗑️ Delete Record",
+                        copy: "📋 Copy",
+                        
+                        // Daily Challenge
+                        dailyChallenge: "Daily Challenge",
+                        challengeDesc: "Earn 200 extra points!",
+                        startChallenge: "Start Challenge",
+                        close: "Close",
+                        
+                        // Advanced Mode
+                        advancedMode: "🎯 Advanced Mode",
+                        advancedDesc: "Explore additional features and advanced questions",
+                        advancedQuestions: "🚀 Advanced Questions",
+                        achievements: "🏆 Daily Challenges", 
+                        leaderboard: "📊 Leaderboard"
+                    }
+                };
+            }
+
             init() {
-                // انتظر حتى تحمل اللعبة الأساسية
                 setTimeout(() => {
                     this.addLanguageSwitch();
                     this.addAdvancedSection();
+                    this.addDailyChallenge();
                     console.log('✅ Zerox Enhanced - تم التثبيت!');
                 }, 2000);
             }
@@ -154,8 +321,8 @@
                     const languageSwitch = document.createElement('div');
                     languageSwitch.className = 'language-switch';
                     languageSwitch.innerHTML = `
-                        <button class="lang-btn" onclick="zeroxEnhanced.switchLanguage('ar')">🌐 العربية</button>
-                        <button class="lang-btn" onclick="zeroxEnhanced.switchLanguage('en')">🌐 English</button>
+                        <button class="lang-btn ${this.currentLanguage === 'ar' ? 'active' : ''}" onclick="zeroxEnhanced.switchLanguage('ar')">🌐 العربية</button>
+                        <button class="lang-btn ${this.currentLanguage === 'en' ? 'active' : ''}" onclick="zeroxEnhanced.switchLanguage('en')">🌐 English</button>
                     `;
                     header.style.position = 'relative';
                     header.appendChild(languageSwitch);
@@ -169,17 +336,17 @@
                     advancedSection.className = 'advanced-section';
                     advancedSection.innerHTML = `
                         <div class="card">
-                            <h3>🎯 الوضع المتقدم</h3>
-                            <p style="color: #94a3b8; margin-bottom: 15px;">استكشف ميزات إضافية وأسئلة متقدمة</p>
+                            <h3>${this.translate('advancedMode')}</h3>
+                            <p style="color: #94a3b8; margin-bottom: 15px;">${this.translate('advancedDesc')}</p>
                             <div class="advanced-options">
-                                <button onclick="zeroxEnhanced.showMessage('🚀 نظام الأسئلة المتقدمة قريباً!')">
-                                    🚀 الأسئلة المتقدمة
+                                <button onclick="zeroxEnhanced.startAdvancedQuestions()">
+                                    ${this.translate('advancedQuestions')}
                                 </button>
-                                <button onclick="zeroxEnhanced.showMessage('🏆 نظام الإنجازات والتحديات قريباً!')">
-                                    🏆 التحديات اليومية
+                                <button onclick="zeroxEnhanced.startDailyChallenge()">
+                                    ${this.translate('achievements')}
                                 </button>
-                                <button onclick="zeroxEnhanced.showMessage('📊 لوحة المتصدرين قريباً!')">
-                                    📊 لوحة المتصدرين
+                                <button onclick="zeroxEnhanced.showMessage('📊 ' + zeroxEnhanced.translate('leaderboard') + ' قريباً!')">
+                                    ${this.translate('leaderboard')}
                                 </button>
                             </div>
                         </div>
@@ -188,56 +355,171 @@
                 }
             }
 
-            switchLanguage(lang) {
-                this.currentLanguage = lang;
-                if (lang === 'ar') {
-                    this.showMessage('🌐 تم التبديل إلى اللغة العربية');
-                    document.documentElement.dir = 'rtl';
-                    document.documentElement.lang = 'ar';
-                } else {
-                    this.showMessage('🌐 Switched to English');
-                    document.documentElement.dir = 'ltr';
-                    document.documentElement.lang = 'en';
+            addDailyChallenge() {
+                const sidebar = document.querySelector('.sidebar');
+                if (sidebar) {
+                    const challengeCard = document.createElement('div');
+                    challengeCard.className = 'card';
+                    challengeCard.innerHTML = `
+                        <h3>${this.translate('dailyChallenge')}</h3>
+                        <p style="color: #94a3b8; font-size: 0.9rem; margin: 10px 0;">${this.translate('challengeDesc')}</p>
+                        <button onclick="zeroxEnhanced.startDailyChallenge()" style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; width: 100%;">
+                            ${this.translate('startChallenge')}
+                        </button>
+                    `;
+                    sidebar.appendChild(challengeCard);
                 }
             }
 
-            showMessage(message) {
-                // إزالة أي رسالة سابقة
+            switchLanguage(lang) {
+                this.currentLanguage = lang;
+                
+                // تحديث الأزرار النشطة
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`.lang-btn[onclick="zeroxEnhanced.switchLanguage('${lang}')"]`).classList.add('active');
+                
+                // تحديث اتجاه الصفحة
+                document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+                document.documentElement.lang = lang;
+                
+                // تحديث كل النصوص في الصفحة
+                this.updateAllTexts();
+                
+                this.showMessage(lang === 'ar' ? '🌐 تم التبديل إلى اللغة العربية' : '🌐 Switched to English');
+            }
+
+            updateAllTexts() {
+                // تحديث كل النصوص حسب اللغة
+                for (const [key, value] of Object.entries(this.translations[this.currentLanguage])) {
+                    const elements = document.querySelectorAll(`[data-lang="${key}"]`);
+                    elements.forEach(element => {
+                        element.textContent = value;
+                    });
+                    
+                    // أيضًا نحدث العناصر التي ليس لها data-lang ولكن نعرف مكانها
+                    this.updateSpecificElements(key, value);
+                }
+            }
+
+            updateSpecificElements(key, value) {
+                // تحديث عناصر محددة في الصفحة
+                const selectors = {
+                    title: '.title',
+                    subtitle: '.subtitle',
+                    designer: '.designer',
+                    welcome: '#welcome h2',
+                    // يمكن إضافة المزيد حسب الحاجة
+                };
+                
+                if (selectors[key]) {
+                    const element = document.querySelector(selectors[key]);
+                    if (element) {
+                        element.textContent = value;
+                    }
+                }
+            }
+
+            translate(key) {
+                return this.translations[this.currentLanguage]?.[key] || key;
+            }
+
+            startDailyChallenge() {
+                const challenge = {
+                    question: {
+                        ar: "ما هو أفضل طريقة للكشف عن هجوم DDoS؟",
+                        en: "What is the best method to detect a DDoS attack?"
+                    },
+                    answers: {
+                        ar: [
+                            "مراقبة استهلاك النطاق الترددي",
+                            "فحص سجلات النظام",
+                            "استخدام أنظمة كشف التسلل",
+                            "جميع ما سبق"
+                        ],
+                        en: [
+                            "Monitor bandwidth consumption",
+                            "Check system logs", 
+                            "Use intrusion detection systems",
+                            "All of the above"
+                        ]
+                    },
+                    correct: 3,
+                    reward: 200
+                };
+                
+                this.showChallengeModal(challenge);
+            }
+
+            showChallengeModal(challenge) {
+                // إزالة أي نافذة سابقة
+                const oldModal = document.querySelector('.challenge-modal');
+                if (oldModal) {
+                    oldModal.remove();
+                }
+
+                const modal = document.createElement('div');
+                modal.className = 'challenge-modal';
+                modal.innerHTML = `
+                    <div class="challenge-content">
+                        <h3>${this.translate('dailyChallenge')}</h3>
+                        <div class="challenge-question">
+                            ${challenge.question[this.currentLanguage]}
+                        </div>
+                        <div class="challenge-answers">
+                            ${challenge.answers[this.currentLanguage].map((answer, index) => `
+                                <div class="challenge-answer" onclick="zeroxEnhanced.checkChallengeAnswer(${index}, ${challenge.correct})">
+                                    ${index + 1}. ${answer}
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="challenge-buttons">
+                            <button onclick="zeroxEnhanced.closeChallenge()">${this.translate('close')}</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+            }
+
+            checkChallengeAnswer(selected, correct) {
+                if (selected === correct) {
+                    this.showMessage('🎉 إجابة صحيحة! +200 نقطة', 'success');
+                    this.closeChallenge();
+                } else {
+                    this.showMessage('❌ إجابة خاطئة، حاول مرة أخرى!', 'error');
+                }
+            }
+
+            closeChallenge() {
+                const modal = document.querySelector('.challenge-modal');
+                if (modal) {
+                    modal.remove();
+                }
+            }
+
+            startAdvancedQuestions() {
+                this.showMessage('🚀 نظام الأسئلة المتقدمة قيد التطوير!', 'info');
+            }
+
+            showMessage(message, type = 'info') {
                 const oldMessage = document.querySelector('.enhanced-message');
                 if (oldMessage) {
                     oldMessage.remove();
                 }
 
-                // إنشاء رسالة جديدة
                 const messageDiv = document.createElement('div');
-                messageDiv.className = 'enhanced-message info';
+                messageDiv.className = `enhanced-message ${type}`;
                 messageDiv.textContent = message;
                 
                 document.body.appendChild(messageDiv);
                 
-                // إزالة الرسالة بعد 3 ثواني
                 setTimeout(() => {
                     if (messageDiv.parentElement) {
                         messageDiv.remove();
                     }
                 }, 3000);
-            }
-
-            // دالة مساعدة للترجمة (يمكن تطويرها لاحقاً)
-            translate(key) {
-                const translations = {
-                    ar: {
-                        title: "مدافع الأمن السيبراني",
-                        start: "ابدأ اللعبة",
-                        advanced: "الوضع المتقدم"
-                    },
-                    en: {
-                        title: "Cyber Defender",
-                        start: "Start Game", 
-                        advanced: "Advanced Mode"
-                    }
-                };
-                return translations[this.currentLanguage]?.[key] || key;
             }
         }
 
