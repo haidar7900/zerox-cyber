@@ -73,6 +73,90 @@
             box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4);
         }
 
+        /* واجهة الأسئلة المتقدمة */
+        .advanced-game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 4000;
+            backdrop-filter: blur(5px);
+        }
+
+        .advanced-game-content {
+            background: linear-gradient(135deg, #0b1220, #07101b);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .advanced-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .advanced-question {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: #e6eef6;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .advanced-answers {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .advanced-answer-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e6eef6;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: right;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .advanced-answer-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-5px);
+        }
+
+        .advanced-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .advanced-buttons button {
+            background: linear-gradient(45deg, #2dd4bf, #a78bfa);
+            color: #041025;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
         /* نافذة التحدي اليومي */
         .challenge-modal {
             position: fixed;
@@ -217,8 +301,144 @@
         class ZeroxEnhanced {
             constructor() {
                 this.currentLanguage = 'ar';
+                this.advancedQuestions = this.loadAdvancedQuestions();
                 this.translations = this.loadTranslations();
                 this.init();
+            }
+
+            loadAdvancedQuestions() {
+                return [
+                    {
+                        id: 1,
+                        question: {
+                            ar: "ما الفرق بين IDS و IPS في أمن الشبكات؟",
+                            en: "What is the difference between IDS and IPS in network security?"
+                        },
+                        answers: {
+                            ar: [
+                                "نفس النظام لكن بأسماء مختلفة",
+                                "IDS يرصد فقط، IPS يرصد ويمنع",
+                                "IDS للشبكات الصغيرة، IPS للكبيرة",
+                                "لا فرق تقني بينهما"
+                            ],
+                            en: [
+                                "Same system with different names",
+                                "IDS only detects, IPS detects and prevents",
+                                "IDS for small networks, IPS for large ones",
+                                "No technical difference"
+                            ]
+                        },
+                        correct: 1,
+                        explain: {
+                            ar: "IDS نظام كشف التسلل يرصد الهجمات فقط، بينما IPS نظام منع التسلل يرصد ويمنع الهجمات تلقائياً",
+                            en: "IDS (Intrusion Detection System) only detects attacks, while IPS (Intrusion Prevention System) detects and automatically blocks attacks"
+                        }
+                    },
+                    {
+                        id: 2,
+                        question: {
+                            ar: "ما هو هجوم Man-in-the-Middle وكيف يعمل؟",
+                            en: "What is a Man-in-the-Middle attack and how does it work?"
+                        },
+                        answers: {
+                            ar: [
+                                "اختراق الخوادم مباشرة",
+                                "اعتراض الاتصال بين طرفين",
+                                "تخمين كلمات المرور",
+                                "حقن أكواد خبيثة"
+                            ],
+                            en: [
+                                "Direct server hacking",
+                                "Intercepting communication between two parties",
+                                "Password guessing",
+                                "Malicious code injection"
+                            ]
+                        },
+                        correct: 1,
+                        explain: {
+                            ar: "المهاجم يعترض الاتصال بين الطرفين ويتظاهر بأنه كل منهما للطرف الآخر",
+                            en: "The attacker intercepts communication between two parties and pretends to be each one to the other"
+                        }
+                    },
+                    {
+                        id: 3,
+                        question: {
+                            ar: "ما الفرق الأساسي بين تشفير RSA و AES؟",
+                            en: "What is the fundamental difference between RSA and AES encryption?"
+                        },
+                        answers: {
+                            ar: [
+                                "نفس الخوارزمية بأسماء مختلفة",
+                                "RSA للتوقيع، AES للتشفير",
+                                "RSA أسرع من AES",
+                                "AES للتوقيع، RSA للتشفير"
+                            ],
+                            en: [
+                                "Same algorithm with different names",
+                                "RSA for signing, AES for encryption",
+                                "RSA is faster than AES",
+                                "AES for signing, RSA for encryption"
+                            ]
+                        },
+                        correct: 1,
+                        explain: {
+                            ar: "RSA خوارزمية تشفير غير متماثل تستخدم للمفاتيح والتوقيعات، بينما AES خوارزمية تشفير متماثل تستخدم لتشفير البيانات",
+                            en: "RSA is an asymmetric encryption algorithm used for keys and signatures, while AES is a symmetric encryption algorithm used for data encryption"
+                        }
+                    },
+                    {
+                        id: 4,
+                        question: {
+                            ar: "كيف تحمي ضد هجمات XSS في تطبيقات الويب؟",
+                            en: "How to protect against XSS attacks in web applications?"
+                        },
+                        answers: {
+                            ar: [
+                                "تعطيل الجافا سكريبت",
+                                "تحقق وتنظيف المدخلات",
+                                "استخدام HTTPS فقط",
+                                "منع تحميل الصور"
+                            ],
+                            en: [
+                                "Disable JavaScript",
+                                "Validate and sanitize inputs",
+                                "Use HTTPS only",
+                                "Block image loading"
+                            ]
+                        },
+                        correct: 1,
+                        explain: {
+                            ar: "تنظيف وفحص المدخلات يمنع حقن الأكواد الخبيثة في المتصفح",
+                            en: "Sanitizing and validating inputs prevents malicious code injection in the browser"
+                        }
+                    },
+                    {
+                        id: 5,
+                        question: {
+                            ar: "ما هو Zero-Knowledge Proof في التشفير؟",
+                            en: "What is Zero-Knowledge Proof in cryptography?"
+                        },
+                        answers: {
+                            ar: [
+                                "إثبات بدون كشف المعلومات",
+                                "تشفير بدون مفتاح",
+                                "حذف البيانات نهائياً",
+                                "مشاركة كل المعلومات"
+                            ],
+                            en: [
+                                "Proof without revealing information",
+                                "Encryption without keys",
+                                "Permanent data deletion",
+                                "Sharing all information"
+                            ]
+                        },
+                        correct: 0,
+                        explain: {
+                            ar: "تسمح بإثبات صحة معلومة دون الكشف عن المعلومة نفسها",
+                            en: "Allows proving the validity of information without revealing the information itself"
+                        }
+                    }
+                ];
             }
 
             loadTranslations() {
@@ -261,7 +481,13 @@
                         advancedDesc: "استكشف ميزات إضافية وأسئلة متقدمة",
                         advancedQuestions: "🚀 الأسئلة المتقدمة",
                         achievements: "🏆 التحديات اليومية",
-                        leaderboard: "📊 لوحة المتصدرين"
+                        leaderboard: "📊 لوحة المتصدرين",
+
+                        // الأسئلة المتقدمة
+                        score: "النقاط",
+                        time: "الوقت",
+                        nextQuestion: "السؤال التالي",
+                        finish: "إنهاء"
                     },
                     en: {
                         // Header
@@ -301,7 +527,13 @@
                         advancedDesc: "Explore additional features and advanced questions",
                         advancedQuestions: "🚀 Advanced Questions",
                         achievements: "🏆 Daily Challenges", 
-                        leaderboard: "📊 Leaderboard"
+                        leaderboard: "📊 Leaderboard",
+
+                        // Advanced Questions
+                        score: "Score",
+                        time: "Time",
+                        nextQuestion: "Next Question",
+                        finish: "Finish"
                     }
                 };
             }
@@ -384,45 +616,88 @@
                 document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
                 document.documentElement.lang = lang;
                 
-                // تحديث كل النصوص في الصفحة
-                this.updateAllTexts();
+                // تحديث عنوان الصفحة
+                document.title = this.translate('title');
                 
                 this.showMessage(lang === 'ar' ? '🌐 تم التبديل إلى اللغة العربية' : '🌐 Switched to English');
             }
 
-            updateAllTexts() {
-                // تحديث كل النصوص حسب اللغة
-                for (const [key, value] of Object.entries(this.translations[this.currentLanguage])) {
-                    const elements = document.querySelectorAll(`[data-lang="${key}"]`);
-                    elements.forEach(element => {
-                        element.textContent = value;
-                    });
-                    
-                    // أيضًا نحدث العناصر التي ليس لها data-lang ولكن نعرف مكانها
-                    this.updateSpecificElements(key, value);
-                }
-            }
-
-            updateSpecificElements(key, value) {
-                // تحديث عناصر محددة في الصفحة
-                const selectors = {
-                    title: '.title',
-                    subtitle: '.subtitle',
-                    designer: '.designer',
-                    welcome: '#welcome h2',
-                    // يمكن إضافة المزيد حسب الحاجة
-                };
-                
-                if (selectors[key]) {
-                    const element = document.querySelector(selectors[key]);
-                    if (element) {
-                        element.textContent = value;
-                    }
-                }
-            }
-
             translate(key) {
                 return this.translations[this.currentLanguage]?.[key] || key;
+            }
+
+            startAdvancedQuestions() {
+                this.currentAdvancedQuestion = 0;
+                this.advancedScore = 0;
+                this.showAdvancedQuestion();
+            }
+
+            showAdvancedQuestion() {
+                const question = this.advancedQuestions[this.currentAdvancedQuestion];
+                if (!question) {
+                    this.finishAdvancedGame();
+                    return;
+                }
+
+                const modal = document.createElement('div');
+                modal.className = 'advanced-game-modal';
+                modal.innerHTML = `
+                    <div class="advanced-game-content">
+                        <div class="advanced-stats">
+                            <span>${this.translate('score')}: ${this.advancedScore}</span>
+                            <span>${this.translate('question')}: ${this.currentAdvancedQuestion + 1}/${this.advancedQuestions.length}</span>
+                        </div>
+                        
+                        <div class="advanced-question">
+                            ${question.question[this.currentLanguage]}
+                        </div>
+                        
+                        <div class="advanced-answers">
+                            ${question.answers[this.currentLanguage].map((answer, index) => `
+                                <button class="advanced-answer-btn" onclick="zeroxEnhanced.checkAdvancedAnswer(${index}, ${question.correct})">
+                                    ${index + 1}. ${answer}
+                                </button>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="advanced-buttons">
+                            <button onclick="zeroxEnhanced.closeAdvancedGame()">${this.translate('close')}</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+            }
+
+            checkAdvancedAnswer(selected, correct) {
+                const question = this.advancedQuestions[this.currentAdvancedQuestion];
+                
+                if (selected === correct) {
+                    this.advancedScore += 100;
+                    this.showMessage('🎉 ' + (this.currentLanguage === 'ar' ? 'إجابة صحيحة! +100 نقطة' : 'Correct answer! +100 points'), 'success');
+                } else {
+                    this.showMessage('❌ ' + (this.currentLanguage === 'ar' ? 'إجابة خاطئة' : 'Wrong answer'), 'error');
+                }
+
+                // الانتقال للسؤال التالي بعد ثانيتين
+                setTimeout(() => {
+                    this.currentAdvancedQuestion++;
+                    this.closeAdvancedGame();
+                    this.showAdvancedQuestion();
+                }, 2000);
+            }
+
+            closeAdvancedGame() {
+                const modal = document.querySelector('.advanced-game-modal');
+                if (modal) {
+                    modal.remove();
+                }
+            }
+
+            finishAdvancedGame() {
+                this.showMessage('🏆 ' + (this.currentLanguage === 'ar' ? 
+                    `إنتهت الأسئلة المتقدمة! النقاط: ${this.advancedScore}` : 
+                    `Advanced questions finished! Score: ${this.advancedScore}`), 'success');
             }
 
             startDailyChallenge() {
@@ -453,7 +728,6 @@
             }
 
             showChallengeModal(challenge) {
-                // إزالة أي نافذة سابقة
                 const oldModal = document.querySelector('.challenge-modal');
                 if (oldModal) {
                     oldModal.remove();
@@ -485,10 +759,10 @@
 
             checkChallengeAnswer(selected, correct) {
                 if (selected === correct) {
-                    this.showMessage('🎉 إجابة صحيحة! +200 نقطة', 'success');
+                    this.showMessage('🎉 ' + (this.currentLanguage === 'ar' ? 'إجابة صحيحة! +200 نقطة' : 'Correct answer! +200 points'), 'success');
                     this.closeChallenge();
                 } else {
-                    this.showMessage('❌ إجابة خاطئة، حاول مرة أخرى!', 'error');
+                    this.showMessage('❌ ' + (this.currentLanguage === 'ar' ? 'إجابة خاطئة، حاول مرة أخرى!' : 'Wrong answer, try again!'), 'error');
                 }
             }
 
@@ -497,10 +771,6 @@
                 if (modal) {
                     modal.remove();
                 }
-            }
-
-            startAdvancedQuestions() {
-                this.showMessage('🚀 نظام الأسئلة المتقدمة قيد التطوير!', 'info');
             }
 
             showMessage(message, type = 'info') {
