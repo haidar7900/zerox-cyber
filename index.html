@@ -157,6 +157,69 @@
             font-weight: 600;
         }
 
+        /* لوحة المتصدرين */
+        .leaderboard-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 4000;
+            backdrop-filter: blur(5px);
+        }
+
+        .leaderboard-content {
+            background: linear-gradient(135deg, #0b1220, #07101b);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .leaderboard-list {
+            margin: 20px 0;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .leaderboard-rank {
+            font-weight: bold;
+            font-size: 1.1rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        .rank-1 { color: gold; }
+        .rank-2 { color: silver; }
+        .rank-3 { color: #cd7f32; }
+
+        .leaderboard-name {
+            flex: 1;
+            margin: 0 15px;
+        }
+
+        .leaderboard-score {
+            font-weight: bold;
+            color: #2dd4bf;
+        }
+
         /* نافذة التحدي اليومي */
         .challenge-modal {
             position: fixed;
@@ -302,6 +365,7 @@
             constructor() {
                 this.currentLanguage = 'ar';
                 this.advancedQuestions = this.loadAdvancedQuestions();
+                this.leaderboard = this.loadLeaderboard();
                 this.translations = this.loadTranslations();
                 this.init();
             }
@@ -441,6 +505,24 @@
                 ];
             }
 
+            loadLeaderboard() {
+                const saved = localStorage.getItem('zerox_leaderboard');
+                if (saved) {
+                    return JSON.parse(saved);
+                }
+                return [
+                    { name: "حيدر", score: 1500 },
+                    { name: "أحمد", score: 1200 },
+                    { name: "محمد", score: 900 },
+                    { name: "فاطمة", score: 800 },
+                    { name: "زيد", score: 700 }
+                ];
+            }
+
+            saveLeaderboard() {
+                localStorage.setItem('zerox_leaderboard', JSON.stringify(this.leaderboard));
+            }
+
             loadTranslations() {
                 return {
                     ar: {
@@ -487,7 +569,14 @@
                         score: "النقاط",
                         time: "الوقت",
                         nextQuestion: "السؤال التالي",
-                        finish: "إنهاء"
+                        finish: "إنهاء",
+
+                        // لوحة المتصدرين
+                        topPlayers: "🏆 أفضل اللاعبين",
+                        player: "اللاعب",
+                        points: "النقاط",
+                        yourScore: "نتيجتك",
+                        addPlayer: "إضافة لاعب"
                     },
                     en: {
                         // Header
@@ -533,7 +622,14 @@
                         score: "Score",
                         time: "Time",
                         nextQuestion: "Next Question",
-                        finish: "Finish"
+                        finish: "Finish",
+
+                        // Leaderboard
+                        topPlayers: "🏆 Top Players",
+                        player: "Player",
+                        points: "Points",
+                        yourScore: "Your Score",
+                        addPlayer: "Add Player"
                     }
                 };
             }
@@ -543,6 +639,7 @@
                     this.addLanguageSwitch();
                     this.addAdvancedSection();
                     this.addDailyChallenge();
+                    this.updateAllTexts(); // تحديث النصوص أول مرة
                     console.log('✅ Zerox Enhanced - تم التثبيت!');
                 }, 2000);
             }
@@ -577,7 +674,7 @@
                                 <button onclick="zeroxEnhanced.startDailyChallenge()">
                                     ${this.translate('achievements')}
                                 </button>
-                                <button onclick="zeroxEnhanced.showMessage('📊 ' + zeroxEnhanced.translate('leaderboard') + ' قريباً!')">
+                                <button onclick="zeroxEnhanced.showLeaderboard()">
                                     ${this.translate('leaderboard')}
                                 </button>
                             </div>
@@ -610,7 +707,8 @@
                 document.querySelectorAll('.lang-btn').forEach(btn => {
                     btn.classList.remove('active');
                 });
-                document.querySelector(`.lang-btn[onclick="zeroxEnhanced.switchLanguage('${lang}')"]`).classList.add('active');
+                const activeBtn = document.querySelector(`.lang-btn[onclick="zeroxEnhanced.switchLanguage('${lang}')"]`);
+                if (activeBtn) activeBtn.classList.add('active');
                 
                 // تحديث اتجاه الصفحة
                 document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -619,7 +717,32 @@
                 // تحديث عنوان الصفحة
                 document.title = this.translate('title');
                 
+                // تحديث كل النصوص في الصفحة
+                this.updateAllTexts();
+                
                 this.showMessage(lang === 'ar' ? '🌐 تم التبديل إلى اللغة العربية' : '🌐 Switched to English');
+            }
+
+            updateAllTexts() {
+                // تحديث النصوص في الإضافات
+                const advancedSection = document.querySelector('.advanced-section');
+                if (advancedSection) {
+                    advancedSection.querySelector('h3').textContent = this.translate('advancedMode');
+                    advancedSection.querySelector('p').textContent = this.translate('advancedDesc');
+                    
+                    const buttons = advancedSection.querySelectorAll('button');
+                    if (buttons[0]) buttons[0].textContent = this.translate('advancedQuestions');
+                    if (buttons[1]) buttons[1].textContent = this.translate('achievements');
+                    if (buttons[2]) buttons[2].textContent = this.translate('leaderboard');
+                }
+
+                // تحديث التحدي اليومي
+                const challengeCard = document.querySelector('.sidebar .card:last-child');
+                if (challengeCard) {
+                    challengeCard.querySelector('h3').textContent = this.translate('dailyChallenge');
+                    challengeCard.querySelector('p').textContent = this.translate('challengeDesc');
+                    challengeCard.querySelector('button').textContent = this.translate('startChallenge');
+                }
             }
 
             translate(key) {
@@ -679,7 +802,6 @@
                     this.showMessage('❌ ' + (this.currentLanguage === 'ar' ? 'إجابة خاطئة' : 'Wrong answer'), 'error');
                 }
 
-                // الانتقال للسؤال التالي بعد ثانيتين
                 setTimeout(() => {
                     this.currentAdvancedQuestion++;
                     this.closeAdvancedGame();
@@ -698,6 +820,65 @@
                 this.showMessage('🏆 ' + (this.currentLanguage === 'ar' ? 
                     `إنتهت الأسئلة المتقدمة! النقاط: ${this.advancedScore}` : 
                     `Advanced questions finished! Score: ${this.advancedScore}`), 'success');
+            }
+
+            showLeaderboard() {
+                const modal = document.createElement('div');
+                modal.className = 'leaderboard-modal';
+                modal.innerHTML = `
+                    <div class="leaderboard-content">
+                        <h3>${this.translate('topPlayers')}</h3>
+                        <div class="leaderboard-list">
+                            ${this.leaderboard.map((player, index) => `
+                                <div class="leaderboard-item">
+                                    <div class="leaderboard-rank ${index < 3 ? 'rank-' + (index + 1) : ''}">
+                                        ${index + 1}
+                                    </div>
+                                    <div class="leaderboard-name">${player.name}</div>
+                                    <div class="leaderboard-score">${player.score} ${this.translate('points')}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(45, 212, 191, 0.1); border-radius: 8px;">
+                            <strong>${this.translate('yourScore')}:</strong> 
+                            <input type="text" id="playerName" placeholder="${this.translate('player')}" style="margin: 0 10px; padding: 5px; border: none; border-radius: 4px; background: rgba(255,255,255,0.1); color: white;">
+                            <input type="number" id="playerScore" placeholder="0" style="margin: 0 10px; padding: 5px; border: none; border-radius: 4px; background: rgba(255,255,255,0.1); color: white; width: 80px;">
+                            <button onclick="zeroxEnhanced.addToLeaderboard()" style="background: #2dd4bf; color: #041025; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+                                ${this.translate('addPlayer')}
+                            </button>
+                        </div>
+                        <div class="challenge-buttons" style="margin-top: 20px;">
+                            <button onclick="zeroxEnhanced.closeLeaderboard()">${this.translate('close')}</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+            }
+
+            addToLeaderboard() {
+                const nameInput = document.getElementById('playerName');
+                const scoreInput = document.getElementById('playerScore');
+                
+                const name = nameInput.value.trim();
+                const score = parseInt(scoreInput.value);
+                
+                if (name && !isNaN(score)) {
+                    this.leaderboard.push({ name, score });
+                    this.leaderboard.sort((a, b) => b.score - a.score);
+                    this.leaderboard = this.leaderboard.slice(0, 10); // أفضل 10 فقط
+                    this.saveLeaderboard();
+                    this.closeLeaderboard();
+                    this.showLeaderboard(); // إعادة فتح اللوحة المحدثة
+                    this.showMessage('✅ ' + (this.currentLanguage === 'ar' ? 'تم إضافة اللاعب!' : 'Player added!'), 'success');
+                }
+            }
+
+            closeLeaderboard() {
+                const modal = document.querySelector('.leaderboard-modal');
+                if (modal) {
+                    modal.remove();
+                }
             }
 
             startDailyChallenge() {
