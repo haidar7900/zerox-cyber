@@ -805,6 +805,29 @@
             text-align: right;
         }
 
+        .typing-indicator {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .typing-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            margin: 0 2px;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
         @media (max-width: 768px) {
             .language-switch {
                 top: 10px;
@@ -931,6 +954,9 @@
                             </button>
                             <button class="game-btn" onclick="gameManager.showLeaderboard()">
                                 📊 لوحة المتصدرين
+                            </button>
+                            <button class="game-btn" onclick="gameManager.showAchievements()">
+                                🏅 الإنجازات
                             </button>
                         </div>
                     </div>
@@ -1118,7 +1144,8 @@
                                 ar: ["123456", "password", "اسمك", "مزيج من أحرف وأرقام ورموز"],
                                 en: ["123456", "password", "your name", "combination of letters, numbers and symbols"]
                             },
-                            correct: 3
+                            correct: 3,
+                            explanation: { ar: "كلمة المرور القوية تحتوي على مزيج من الأحرف الكبيرة والصغيرة والأرقام والرموز", en: "Strong password contains mix of uppercase, lowercase, numbers and symbols" }
                         },
                         {
                             question: { ar: "ماذا يعني HTTPS في عنوان الموقع؟", en: "What does HTTPS mean in a website address?" },
@@ -1126,7 +1153,8 @@
                                 ar: ["نفس HTTP", "نسخة محسنة", "اتصال آمن", "نوع خادم"],
                                 en: ["Same as HTTP", "Enhanced version", "Secure connection", "Server type"]
                             },
-                            correct: 2
+                            correct: 2,
+                            explanation: { ar: "HTTPS يعني أن الاتصال مشفر وآمن بين المتصفح والخادم", en: "HTTPS means encrypted and secure connection between browser and server" }
                         },
                         {
                             question: { ar: "ما هو التصيد الاحتيالي (Phishing)؟", en: "What is Phishing?" },
@@ -1134,7 +1162,71 @@
                                 ar: ["نوع من السمك", "هجوم برمجيات خبيثة", "احتيال لسرقة المعلومات", "تقنية تشفير"],
                                 en: ["A type of fish", "Malware attack", "Fraud to steal information", "Encryption technique"]
                             },
-                            correct: 2
+                            correct: 2,
+                            explanation: { ar: "التصيد هو محاولة خداعك لكشف معلوماتك الشخصية مثل كلمات المرور", en: "Phishing is attempt to trick you into revealing personal information like passwords" }
+                        },
+                        {
+                            question: { ar: "ما هو أفضل إجراء لحماية حسابك؟", en: "What is the best action to protect your account?" },
+                            answers: {
+                                ar: ["استخدام كلمة مرور بسيطة", "تفعيل المصادقة الثنائية", "مشاركة كلمة المرور", "عدم تغيير كلمة المرور أبداً"],
+                                en: ["Use a simple password", "Enable two-factor authentication", "Share your password", "Never change your password"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "المصادقة الثنائية تضيف طبقة حماية إضافية لحسابك", en: "Two-factor authentication adds extra protection layer to your account" }
+                        },
+                        {
+                            question: { ar: "ما هو الهدف من برامج مكافحة الفيروسات؟", en: "What is the purpose of antivirus software?" },
+                            answers: {
+                                ar: ["تسريع الكمبيوتر", "اكتشاف وإزالة البرمجيات الضارة", "زيادة مساحة التخزين", "تحسين الاتصال بالإنترنت"],
+                                en: ["Speed up the computer", "Detect and remove malicious software", "Increase storage space", "Improve internet connection"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "برامج مكافحة الفيروسات تحمي جهازك من البرمجيات الخبيثة", en: "Antivirus software protects your device from malicious software" }
+                        },
+                        {
+                            question: { ar: "ما هو التحديث الأمني؟", en: "What is a security update?" },
+                            answers: {
+                                ar: ["إصدار جديد من البرنامج", "إصلاح ثغرات أمنية", "تغيير واجهة المستخدم", "إضافة ميزات جديدة"],
+                                en: ["New software version", "Fix security vulnerabilities", "Change user interface", "Add new features"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "التحديثات الأمنية تصلح الثغرات التي يمكن للمخترقين استغلالها", en: "Security updates fix vulnerabilities that hackers can exploit" }
+                        },
+                        {
+                            question: { ar: "ما هو الواي فاي العام؟", en: "What is public Wi-Fi?" },
+                            answers: {
+                                ar: ["شبكة لاسلكية مفتوحة للجميع", "شبكة خاصة بالمنزل", "شبكة سريعة جداً", "نوع من الهواتف"],
+                                en: ["Open wireless network for everyone", "Home private network", "Very fast network", "Type of phone"]
+                            },
+                            correct: 0,
+                            explanation: { ar: "شبكات الواي فاي العامة قد تكون غير آمنة ويجب تجنب إجراء المعاملات الحساسة عليها", en: "Public Wi-Fi networks may be insecure and you should avoid sensitive transactions" }
+                        },
+                        {
+                            question: { ar: "ما هو خطر استخدام شبكات الواي فاي العامة؟", en: "What is the risk of using public Wi-Fi networks?" },
+                            answers: {
+                                ar: ["بطء الإنترنت", "انقطاع الاتصال", "اختراق البيانات", "استهلاك البطارية"],
+                                en: ["Slow internet", "Connection interruption", "Data breach", "Battery consumption"]
+                            },
+                            correct: 2,
+                            explanation: { ar: "شبكات الواي فاي العامة قد تسمح للمخترقين بسرقة بياناتك", en: "Public Wi-Fi may allow hackers to steal your data" }
+                        },
+                        {
+                            question: { ar: "ما هو أفضل إجراء عند تلقي بريد إلكتروني مشبوه؟", en: "What is the best action when receiving a suspicious email?" },
+                            answers: {
+                                ar: ["فتحه فوراً", "حذفه دون فتح", "الرد عليه", "إعادة توجيهه للأصدقاء"],
+                                en: ["Open it immediately", "Delete it without opening", "Reply to it", "Forward it to friends"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "البريد الإلكتروني المشبوه قد يحتوي على روابط أو مرفقات ضارة", en: "Suspicious email may contain malicious links or attachments" }
+                        },
+                        {
+                            question: { ar: "ما هو الهدف من النسخ الاحتياطي؟", en: "What is the purpose of backup?" },
+                            answers: {
+                                ar: ["تسريع الجهاز", "حماية البيانات من الفقد", "زيادة الأمان", "تحسين الأداء"],
+                                en: ["Speed up the device", "Protect data from loss", "Increase security", "Improve performance"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "النسخ الاحتياطي يحمي بياناتك في حالة فقدانها بسبب هجوم أو عطل", en: "Backup protects your data in case of loss due to attack or failure" }
                         }
                     ],
                     medium: [
@@ -1144,7 +1236,8 @@
                                 ar: ["باختراق كلمة المرور", "بإغراق الخادم بطلبات زائفة", "بسرقة البيانات", "بتشفير الملفات"],
                                 en: ["By cracking passwords", "By flooding the server with fake requests", "By stealing data", "By encrypting files"]
                             },
-                            correct: 1
+                            correct: 1,
+                            explanation: { ar: "هجوم DDoS يغرق الخادم بكمية هائلة من الطلبات مما يجعله غير قادر على الاستجابة", en: "DDoS attack floods server with massive requests making it unable to respond" }
                         },
                         {
                             question: { ar: "ما هو هجوم الوسيط (Man-in-the-Middle)؟", en: "What is a Man-in-the-Middle attack?" },
@@ -1152,7 +1245,80 @@
                                 ar: ["هجوم على الخوادم", "اعتراض الاتصال بين طرفين", "هجوم بكلمات المرور", "هجوم على البنية التحتية"],
                                 en: ["Attack on servers", "Intercepting communication between two parties", "Password attack", "Infrastructure attack"]
                             },
-                            correct: 1
+                            correct: 1,
+                            explanation: { ar: "المهاجم يعترض الاتصال بين طرفين ويتنصت أو يغير البيانات", en: "Attacker intercepts communication between two parties and eavesdrops or alters data" }
+                        },
+                        {
+                            question: { ar: "ما هو التشفير؟", en: "What is encryption?" },
+                            answers: {
+                                ar: ["حذف البيانات", "تحويل البيانات إلى شكل غير مقروء", "نسخ البيانات", "ضغط البيانات"],
+                                en: ["Deleting data", "Converting data to unreadable form", "Copying data", "Compressing data"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "التشفير يحمي البيانات بتحويلها إلى شكل لا يمكن قراءته بدون مفتاح فك التشفير", en: "Encryption protects data by converting it to unreadable form without decryption key" }
+                        },
+                        {
+                            question: { ar: "ما هو الاختلاف بين التصيد والتصيد المستهدف؟", en: "What is the difference between phishing and spear phishing?" },
+                            answers: {
+                                ar: ["لا يوجد فرق", "التصيد المستهدف موجه لأفراد محددين", "التصيد المستهدف أسهل", "التصيد المستهدف لا يستخدم البريد الإلكتروني"],
+                                en: ["No difference", "Spear phishing targets specific individuals", "Spear phishing is easier", "Spear phishing doesn't use email"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "التصيد المستهدف أكثر تخصيصاً ويستهدف أفراداً أو منظمات محددة", en: "Spear phishing is more personalized and targets specific individuals or organizations" }
+                        },
+                        {
+                            question: { ar: "ما هو برنامج الفدية (Ransomware)؟", en: "What is Ransomware?" },
+                            answers: {
+                                ar: ["برنامج يحمي من الفيروسات", "برنامج يشفّر الملفات ويطلب فدية", "برنامج لتحسين الأداء", "برنامج للنسخ الاحتياطي"],
+                                en: ["Software that protects from viruses", "Software that encrypts files and demands ransom", "Software to improve performance", "Backup software"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "برامج الفدية تشفر ملفاتك وتطلب فدية مقابل إعادتها", en: "Ransomware encrypts your files and demands ransom to restore them" }
+                        },
+                        {
+                            question: { ar: "ما هو جدار الحماية (Firewall)؟", en: "What is a Firewall?" },
+                            answers: {
+                                ar: ["جهاز لتسريع الإنترنت", "نظام لمراقبة وفلترة حركة المرور", "برنامج لمكافحة الفيروسات", "أداة لتحسين البطارية"],
+                                en: ["Device to speed up internet", "System to monitor and filter traffic", "Antivirus software", "Tool to improve battery"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "جدار الحماية يراقب ويراقب حركة المرور الشبكية ويمنع الوصول غير المصرح به", en: "Firewall monitors and controls network traffic and prevents unauthorized access" }
+                        },
+                        {
+                            question: { ar: "ما هو اختبار الاختراق (Penetration Testing)؟", en: "What is Penetration Testing?" },
+                            answers: {
+                                ar: ["هجوم حقيقي على الأنظمة", "اختبار أمني محاكى لاكتشاف الثغرات", "فحص سرعة الشبكة", "تحليل بيانات المستخدم"],
+                                en: ["Real attack on systems", "Simulated security test to discover vulnerabilities", "Network speed test", "User data analysis"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "اختبار الاختراق هو فحص أمني محاكٍ لاكتشاف نقاط الضعف قبل أن يستغلها المخترقون", en: "Penetration testing is simulated security examination to discover vulnerabilities before hackers exploit them" }
+                        },
+                        {
+                            question: { ar: "ما هو نظام كشف التسلل (IDS)؟", en: "What is an Intrusion Detection System (IDS)?" },
+                            answers: {
+                                ar: ["نظام لمنع الهجمات", "نظام لمراقبة الشبكة لاكتشاف الهجمات", "نظام لتسريع الشبكة", "نظام لتحسين الأمان المادي"],
+                                en: ["System to prevent attacks", "System to monitor network for detecting attacks", "System to speed up network", "System to improve physical security"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "نظام كشف التسلل يراقب الشبكة ويكتشف محاولات الاختراق", en: "Intrusion Detection System monitors network and detects breach attempts" }
+                        },
+                        {
+                            question: { ar: "ما هو البصمة الرقمية (Digital Footprint)؟", en: "What is a Digital Footprint?" },
+                            answers: {
+                                ar: ["بصمة الإصبع الرقمية", "آثار البيانات التي تتركها على الإنترنت", "توقيع رقمي", "هوية رقمية"],
+                                en: ["Digital fingerprint", "Data traces you leave on the internet", "Digital signature", "Digital identity"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "البصمة الرقمية هي جميع البيانات التي تتركها عن نفسك على الإنترنت", en: "Digital footprint is all data you leave about yourself on the internet" }
+                        },
+                        {
+                            question: { ar: "ما هو التصيد بالرمح (Spear Phishing)؟", en: "What is Spear Phishing?" },
+                            answers: {
+                                ar: ["هجوم عشوائي بالبريد الإلكتروني", "هجوم موجه لشخص أو منظمة محددة", "هجوم على خوادم البريد", "هجوم على كلمات المرور"],
+                                en: ["Random email attack", "Targeted attack on specific person or organization", "Attack on mail servers", "Password attack"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "التصيد بالرمح يستهدف شخصاً أو منظمة محددة بمحتوى مخصص ومخادع", en: "Spear phishing targets specific person or organization with customized deceptive content" }
                         }
                     ],
                     hard: [
@@ -1162,7 +1328,8 @@
                                 ar: ["هجوم على قواعد البيانات", "هجوم على الشبكات", "هجوم على كلمات المرور", "هجوم على البريد الإلكتروني"],
                                 en: ["Attack on databases", "Attack on networks", "Attack on passwords", "Attack on email"]
                             },
-                            correct: 0
+                            correct: 0,
+                            explanation: { ar: "هجوم حقن SQL يستغل ثغرات في تطبيقات الويب للوصول إلى قواعد البيانات", en: "SQL injection exploits vulnerabilities in web applications to access databases" }
                         },
                         {
                             question: { ar: "ما هو هجوم XSS؟", en: "What is an XSS attack?" },
@@ -1170,7 +1337,80 @@
                                 ar: ["هجوم على الخوادم", "حقن أكواد ضارة في صفحات الويب", "هجوم على كلمات المرور", "هجوم على الشبكات"],
                                 en: ["Attack on servers", "Injecting malicious code into web pages", "Attack on passwords", "Attack on networks"]
                             },
-                            correct: 1
+                            correct: 1,
+                            explanation: { ar: "هجوم XSS يحقن أكواد JavaScript ضارة في صفحات الويب التي يزورها المستخدمون", en: "XSS attack injects malicious JavaScript code into web pages visited by users" }
+                        },
+                        {
+                            question: { ar: "ما هو اختبار القلم (Pen Testing)؟", en: "What is Pen Testing?" },
+                            answers: {
+                                ar: ["اختبار الأقلام الإلكترونية", "اختبار اختراق الأنظمة", "اختبار سرعة الكتابة", "اختبار الشبكات اللاسلكية"],
+                                en: ["Testing electronic pens", "Testing system penetration", "Testing typing speed", "Testing wireless networks"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "اختبار الاختراق هو فحص أمني محاكٍ لتقييم أمان الأنظمة والشبكات", en: "Penetration testing is simulated security assessment to evaluate system and network security" }
+                        },
+                        {
+                            question: { ar: "ما هو الاختلاف بين IDS و IPS؟", en: "What is the difference between IDS and IPS?" },
+                            answers: {
+                                ar: ["نفس النظام", "IDS يرصد فقط، IPS يرصد ويمنع", "IDS للشبكات الصغيرة", "لا فرق"],
+                                en: ["Same system", "IDS only detects, IPS detects and prevents", "IDS for small networks", "No difference"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "IDS يرصد الهجمات فقط بينما IPS يرصدها ويمنعها تلقائياً", en: "IDS only detects attacks while IPS detects and automatically prevents them" }
+                        },
+                        {
+                            question: { ar: "ما هو Zero-Knowledge Proof؟", en: "What is Zero-Knowledge Proof?" },
+                            answers: {
+                                ar: ["إثبات بدون كشف المعلومات", "تشفير بدون مفتاح", "حذف البيانات", "مشاركة المعلومات"],
+                                en: ["Proof without revealing information", "Encryption without keys", "Data deletion", "Information sharing"]
+                            },
+                            correct: 0,
+                            explanation: { ar: "إثبات المعرفة الصفرية يسمح بإثبات صحة معلومة دون الكشف عن المعلومة نفسها", en: "Zero-knowledge proof allows proving validity of information without revealing the information itself" }
+                        },
+                        {
+                            question: { ar: "ما هو هجوم القوة الغاشمة (Brute Force)؟", en: "What is a Brute Force attack?" },
+                            answers: {
+                                ar: ["هجوم على الشبكات", "تجربة جميع التركيبات الممكنة لكلمة المرور", "هجوم على الخوادم", "هجوم على التطبيقات"],
+                                en: ["Attack on networks", "Trying all possible password combinations", "Attack on servers", "Attack on applications"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "هجوم القوة الغاشمة يحاول كسر كلمات المرور بتجربة جميع التركيبات الممكنة", en: "Brute force attack attempts to crack passwords by trying all possible combinations" }
+                        },
+                        {
+                            question: { ar: "ما هو هجوم الهندسة الاجتماعية؟", en: "What is a Social Engineering attack?" },
+                            answers: {
+                                ar: ["هجوم على البرمجيات", "خداع الأشخاص للكشف عن معلومات حساسة", "هجوم على الأجهزة", "هجوم على الشبكات"],
+                                en: ["Attack on software", "Deceiving people to reveal sensitive information", "Attack on devices", "Attack on networks"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "الهندسة الاجتماعية تخدع الأشخاص نفسياً لكشف معلومات حساسة بدلاً من اختراق الأنظمة", en: "Social engineering deceives people psychologically to reveal sensitive information instead of hacking systems" }
+                        },
+                        {
+                            question: { ar: "ما هو التشفير من طرف إلى طرف (End-to-End Encryption)؟", en: "What is End-to-End Encryption?" },
+                            answers: {
+                                ar: ["تشفير البيانات على الخادم فقط", "تشفير البيانات بين المرسل والمستقبل فقط", "تشفير جزئي للبيانات", "تشفير بدون مفتاح"],
+                                en: ["Encrypting data only on the server", "Encrypting data only between sender and receiver", "Partial data encryption", "Encryption without keys"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "التشفير من طرف إلى طرف يضمن أن البيانات مشفرة بين المرسل والمستقبل فقط ولا يمكن فكها أثناء transit", en: "End-to-end encryption ensures data is encrypted only between sender and receiver and cannot be decrypted in transit" }
+                        },
+                        {
+                            question: { ar: "ما هو هجوم رفض الخدمة الموزع (DDoS)؟", en: "What is a Distributed Denial of Service (DDoS) attack?" },
+                            answers: {
+                                ar: ["هجوم من مصدر واحد", "هجوم من عدة مصادر في وقت واحد", "هجوم على كلمات المرور", "هجوم على التطبيقات"],
+                                en: ["Attack from a single source", "Attack from multiple sources simultaneously", "Attack on passwords", "Attack on applications"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "هجوم DDoS يغرق الخادم بطلبات من عدة مصادر مما يجعله غير قادر على الاستجابة للطلبات الشرعية", en: "DDoS attack floods server with requests from multiple sources making it unable to respond to legitimate requests" }
+                        },
+                        {
+                            question: { ar: "ما هو اختبار الثغرات (Vulnerability Assessment)؟", en: "What is Vulnerability Assessment?" },
+                            answers: {
+                                ar: ["هجوم على الأنظمة", "فحص منهجي للثغرات الأمنية", "تحليل البيانات", "مراقبة الشبكة"],
+                                en: ["Attack on systems", "Systematic examination of security vulnerabilities", "Data analysis", "Network monitoring"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "اختبار الثغرات هو عملية منهجية لتحديد وتصنيف وإبلاغ الثغرات الأمنية في الأنظمة", en: "Vulnerability assessment is systematic process of identifying, classifying and reporting security vulnerabilities in systems" }
                         }
                     ],
                     advanced: [
@@ -1180,7 +1420,89 @@
                                 ar: ["لا يوجد فرق", "التهديد هو خطر محتمل، الضعف هو نقطة ضعف", "التهديد هو نقطة ضعف، الضعف هو خطر محتمل", "كلاهما نفس المعنى"],
                                 en: ["No difference", "Threat is potential danger, vulnerability is weakness", "Threat is weakness, vulnerability is potential danger", "Both mean the same"]
                             },
-                            correct: 1
+                            correct: 1,
+                            explanation: { ar: "التهديد هو خطر محتمل يمكن استغلاله، بينما الضعف هو نقطة ضعف في النظام", en: "Threat is potential danger that can be exploited, while vulnerability is weakness in the system" }
+                        },
+                        {
+                            question: { ar: "ما هو نموذج CIA في الأمن السيبراني؟", en: "What is the CIA model in cybersecurity?" },
+                            answers: {
+                                ar: ["السرية والنزاهة والتوافر", "الحوسبة والإنترنت والتطبيقات", "التشفير والتوثيق والتحقق", "الشبكات والأنظمة والتطبيقات"],
+                                en: ["Confidentiality, Integrity, Availability", "Computing, Internet, Applications", "Encryption, Authentication, Verification", "Networks, Systems, Applications"]
+                            },
+                            correct: 0,
+                            explanation: { ar: "نموذج CIA يمثل الركائز الأساسية للأمن: السرية والنزاهة والتوافر", en: "CIA model represents core principles of security: Confidentiality, Integrity, Availability" }
+                        },
+                        {
+                            question: { ar: "ما هو الاختلاف بين التشفير المتماثل وغير المتماثل؟", en: "What is the difference between symmetric and asymmetric encryption?" },
+                            answers: {
+                                ar: ["لا يوجد فرق", "المتماثل يستخدم مفتاحاً واحداً، غير المتماثل يستخدم مفتاحين", "المتماثل أبطأ", "غير المتماثل أقل أماناً"],
+                                en: ["No difference", "Symmetric uses one key, asymmetric uses two keys", "Symmetric is slower", "Asymmetric is less secure"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "التشفير المتماثل يستخدم مفتاحاً واحداً للتشفير وفك التشفير، بينما غير المتماثل يستخدم مفتاحين: عام وخاص", en: "Symmetric encryption uses one key for encryption and decryption, while asymmetric uses two keys: public and private" }
+                        },
+                        {
+                            question: { ar: "ما هو هجوم إعادة التشغيل (Replay Attack)؟", en: "What is a Replay Attack?" },
+                            answers: {
+                                ar: ["إعادة تشغيل الجهاز", "إعادة إرسال بيانات مسروقة", "هجوم على الذاكرة", "هجوم على المعالج"],
+                                en: ["Restarting the device", "Resending stolen data", "Memory attack", "Processor attack"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "هجوم إعادة التشغيل يعيد إرسال بيانات مسروقة صالحة للخداع بالوصول غير المصرح به", en: "Replay attack resends valid stolen data to gain unauthorized access" }
+                        },
+                        {
+                            question: { ar: "ما هو الاختلاف بين التهديد الداخلي والخارجي؟", en: "What is the difference between internal and external threat?" },
+                            answers: {
+                                ar: ["لا يوجد فرق", "الداخلي من داخل المنظمة، الخارجي من خارجها", "الداخلي أقل خطورة", "الخارجي غير موجود"],
+                                en: ["No difference", "Internal from inside organization, external from outside", "Internal is less dangerous", "External doesn't exist"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "التهديدات الداخلية تأتي من موظفين أو أشخاص داخل المنظمة، بينما الخارجية تأتي من خارجها", en: "Internal threats come from employees or people inside organization, while external come from outside" }
+                        },
+                        {
+                            question: { ar: "ما هو اختبار القلم الأبيض مقابل الأسود؟", en: "What is White Box vs Black Box testing?" },
+                            answers: {
+                                ar: ["لا يوجد فرق", "الأبيض مع معرفة النظام، الأسود بدون معرفة", "الأبيض للأنظمة الصغيرة", "الأسود أكثر تعقيداً"],
+                                en: ["No difference", "White box with system knowledge, black box without", "White box for small systems", "Black box more complex"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "اختبار الصندوق الأبيض يتم مع معرفة كاملة بالنظام، بينما الأسود يتم بدون أي معرفة مسبقة", en: "White box testing is done with full system knowledge, while black box without any prior knowledge" }
+                        },
+                        {
+                            question: { ar: "ما هو نموذج OSI؟", en: "What is the OSI model?" },
+                            answers: {
+                                ar: ["نموذج للشبكات يضم 7 طبقات", "نموذج للأمن", "نموذج للبرمجة", "نموذج للتشفير"],
+                                en: ["Networking model with 7 layers", "Security model", "Programming model", "Encryption model"]
+                            },
+                            correct: 0,
+                            explanation: { ar: "نموذج OSI هو إطار نظري يصف وظائف الشبكة عبر 7 طبقات مختلفة", en: "OSI model is theoretical framework describing network functions across 7 different layers" }
+                        },
+                        {
+                            question: { ar: "ما هو الاختلاف بين التصيد والتصيد بالرمح؟", en: "What is the difference between phishing and spear phishing?" },
+                            answers: {
+                                ar: ["لا يوجد فرق", "التصيد عشوائي، التصيد بالرمح موجه", "التصيد بالرمح أسهل", "التصيد لا يستخدم البريد"],
+                                en: ["No difference", "Phishing is random, spear phishing is targeted", "Spear phishing is easier", "Phishing doesn't use email"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "التصيد يرسل رسائل عشوائية للعديد من الأشخاص، بينما التصيد بالرمح يستهدف أفراداً محددين", en: "Phishing sends random messages to many people, while spear phishing targets specific individuals" }
+                        },
+                        {
+                            question: { ar: "ما هو هجوم حجب الخدمة (DoS)؟", en: "What is a Denial of Service (DoS) attack?" },
+                            answers: {
+                                ar: ["هجوم لسرقة البيانات", "هجوم لجعل الخدمة غير متاحة", "هجوم لتغيير البيانات", "هجوم لمراقبة الشبكة"],
+                                en: ["Attack to steal data", "Attack to make service unavailable", "Attack to change data", "Attack to monitor network"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "هجوم حجب الخدمة يهدف إلى جعل المورد أو الخدمة غير متاحة للمستخدمين الشرعيين", en: "Denial of Service attack aims to make resource or service unavailable to legitimate users" }
+                        },
+                        {
+                            question: { ar: "ما هو الاختلاف بين التهديد والهجوم؟", en: "What is the difference between threat and attack?" },
+                            answers: {
+                                ar: ["لا يوجد فرق", "التهديد خطر محتمل، الهجوم تنفيذ فعلي", "التهديد أكثر خطورة", "الهجوم غير موجود"],
+                                en: ["No difference", "Threat is potential danger, attack is actual execution", "Threat is more dangerous", "Attack doesn't exist"]
+                            },
+                            correct: 1,
+                            explanation: { ar: "التهديد هو خطر محتمل، بينما الهجوم هو التنفيذ الفعلي لمحاولة استغلال الثغرة", en: "Threat is potential danger, while attack is actual execution of attempt to exploit vulnerability" }
                         }
                     ],
                     daily: [
@@ -1190,7 +1512,8 @@
                                 ar: ["مراقبة النطاق الترددي", "فحص السجلات", "أنظمة كشف التسلل", "جميع ما سبق"],
                                 en: ["Monitor bandwidth", "Check logs", "Intrusion detection systems", "All of the above"]
                             },
-                            correct: 3
+                            correct: 3,
+                            explanation: { ar: "الكشف عن هجوم DDoS يتطلب مراقبة شاملة للنطاق الترددي والسجلات وأنظمة الكشف", en: "DDoS attack detection requires comprehensive monitoring of bandwidth, logs and detection systems" }
                         }
                     ],
                     simulation: [
@@ -1200,7 +1523,8 @@
                                 ar: ["عنوان المرسل غير مألوف", "يطلب معلومات شخصية", "يحتوي على أخطاء إملائية", "جميع ما سبق"],
                                 en: ["Unfamiliar sender address", "Requests personal information", "Contains spelling errors", "All of the above"]
                             },
-                            correct: 3
+                            correct: 3,
+                            explanation: { ar: "بريد التصيد عادةً يحتوي على عناوين مرسلين مشبوهة ويطلب معلومات شخصية ويحتوي أخطاء", en: "Phishing email usually contains suspicious sender addresses, requests personal information and contains errors" }
                         }
                     ]
                 };
@@ -1312,6 +1636,7 @@
                 
                 if (mode === 'daily') points = 200;
                 if (mode === 'advanced') points = 150;
+                if (mode === 'simulation') points = 100;
                 
                 answerButtons.forEach((btn, index) => {
                     if (index === correct) {
@@ -1322,12 +1647,19 @@
                     btn.style.pointerEvents = 'none';
                 });
                 
+                const questions = mode === 'advanced' ? this.questions.advanced : 
+                                mode === 'daily' ? this.questions.daily : 
+                                mode === 'simulation' ? this.questions.simulation :
+                                this.questions[this.currentLevel];
+                
+                const question = questions[this.currentQuestion];
+                
                 if (selected === correct) {
                     this.score += points;
                     this.playerStats.correctAnswers++;
                     this.showMessage(`🎉 ${this.translate('correct')}! +${points} ${this.translate('points')}`, 'success');
                 } else {
-                    this.showMessage(`❌ ${this.translate('wrong')}!`, 'error');
+                    this.showMessage(`❌ ${this.translate('wrong')}! الإجابة الصحيحة: ${question.answers[this.currentLanguage][correct]}`, 'error');
                 }
 
                 setTimeout(() => {
@@ -1337,16 +1669,12 @@
                     this.savePlayerStats();
                     this.updateStatsDisplay();
                     
-                    const questions = mode === 'advanced' ? this.questions.advanced : 
-                                    mode === 'daily' ? this.questions.daily : 
-                                    this.questions[this.currentLevel];
-                    
                     if (this.currentQuestion < questions.length) {
                         this.showGameQuestion(questions, mode);
                     } else {
                         this.finishGame(mode);
                     }
-                }, 2000);
+                }, 3000);
             },
             
             updateProgress() {
@@ -1361,6 +1689,8 @@
                 let message = '';
                 if (mode === 'daily') {
                     message = `🏆 ${this.translate('challenge_completed')}! ${this.translate('score')}: ${this.score}`;
+                } else if (mode === 'simulation') {
+                    message = `🛡️ ${this.translate('simulation_completed')}! ${this.translate('score')}: ${this.score}`;
                 } else {
                     message = `🏆 ${this.translate('game_completed')}! ${this.translate('score')}: ${this.score}`;
                 }
@@ -1469,6 +1799,43 @@
                 document.body.appendChild(modal);
             },
             
+            showAchievements() {
+                const modal = document.createElement('div');
+                modal.className = 'game-modal';
+                modal.innerHTML = `
+                    <div class="game-content">
+                        <h3>🏆 الإنجازات</h3>
+                        <div class="achievements-grid" style="margin: 20px 0;">
+                            <div class="achievement-card">
+                                <div class="achievement-icon">🥇</div>
+                                <div class="achievement-title">المبتدئ</div>
+                                <div class="achievement-desc">أكمل 10 أسئلة</div>
+                            </div>
+                            <div class="achievement-card ${this.playerStats.totalQuestions >= 50 ? '' : 'locked'}">
+                                <div class="achievement-icon">🥈</div>
+                                <div class="achievement-title">المحترف</div>
+                                <div class="achievement-desc">أكمل 50 سؤالاً</div>
+                            </div>
+                            <div class="achievement-card ${this.playerStats.totalQuestions >= 100 ? '' : 'locked'}">
+                                <div class="achievement-icon">🥉</div>
+                                <div class="achievement-title">الخبير</div>
+                                <div class="achievement-desc">أكمل 100 سؤال</div>
+                            </div>
+                            <div class="achievement-card">
+                                <div class="achievement-icon">⚡</div>
+                                <div class="achievement-title">سريع</div>
+                                <div class="achievement-desc">أجب على 5 أسئلة في دقيقة</div>
+                            </div>
+                        </div>
+                        <div class="game-buttons">
+                            <button onclick="gameManager.closeModal()">${this.translate('close')}</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+            },
+            
             addToLeaderboard() {
                 const nameInput = document.getElementById('playerName');
                 const scoreInput = document.getElementById('playerScore');
@@ -1549,6 +1916,7 @@
                         wrong: "إجابة خاطئة",
                         game_completed: "اكتملت اللعبة",
                         challenge_completed: "اكتمل التحدي",
+                        simulation_completed: "اكتملت المحاكاة",
                         new_highscore: "رقم قياسي جديد!"
                     },
                     en: {
@@ -1596,6 +1964,7 @@
                         wrong: "Wrong",
                         game_completed: "Game completed",
                         challenge_completed: "Challenge completed",
+                        simulation_completed: "Simulation completed",
                         new_highscore: "New high score!"
                     }
                 };
@@ -1631,6 +2000,9 @@
             startSimulation(type) {
                 this.showMessage(`🛡️ بدء محاكاة ${type}...`, 'info');
                 setTimeout(() => {
+                    this.currentQuestion = 0;
+                    this.score = 0;
+                    this.updateProgress();
                     this.showGameQuestion(this.questions.simulation, 'simulation');
                 }, 1000);
             },
@@ -1658,7 +2030,7 @@
                 chat.classList.toggle('active');
             },
             
-            sendAIMessage() {
+            async sendAIMessage() {
                 const input = document.getElementById('aiInput');
                 const messages = document.getElementById('aiMessages');
                 const question = input.value.trim();
@@ -1671,47 +2043,93 @@
                         </div>
                     `;
                     
-                    // محاكاة رد الذكاء الاصطناعي المتقدم
-                    const aiResponses = {
-                        ar: {
-                            "كلمة المرور": "استخدم كلمات مرور قوية تحتوي على أحرف كبيرة وصغيرة وأرقام ورموز. تجنب استخدام المعلومات الشخصية.",
-                            "التصيد": "التصيد الاحتيالي هو محاولة خداعك لكشف معلوماتك الشخصية. انتبه للرسائل غير المتوقعة وافحص عناوين البريد الإلكتروني بعناية.",
-                            "الشبكات": "استخدم VPN عند الاتصال بشبكات WiFi العامة. تجنب إجراء معاملات حساسة على الشبكات العامة.",
-                            "التحديثات": "احرص على تحديث برامجك وأنظمة التشغيل باستمرار لإصلاح الثغرات الأمنية المعروفة.",
-                            "النسخ الاحتياطي": "احتفظ بنسخ احتياطية منتظمة لبياناتك المهمة في مكان آمن ومنفصل.",
-                            "default": "هذا سؤال ممتاز! للحماية من هذا التهديد، أنصحك بـ: 1) استخدام برامج مكافحة الفيروسات 2) تفعيل جدار الحماية 3) تحديث النظام باستمرار 4) عدم فتح الروابط المشبوهة."
-                        },
-                        en: {
-                            "password": "Use strong passwords containing uppercase and lowercase letters, numbers, and symbols. Avoid using personal information.",
-                            "phishing": "Phishing is an attempt to trick you into revealing personal information. Be cautious of unexpected messages and carefully examine email addresses.",
-                            "networks": "Use VPN when connecting to public WiFi networks. Avoid conducting sensitive transactions on public networks.",
-                            "updates": "Keep your software and operating systems updated to fix known security vulnerabilities.",
-                            "backup": "Maintain regular backups of your important data in a safe and separate location.",
-                            "default": "This is an excellent question! To protect against this threat, I recommend: 1) Using antivirus software 2) Enabling firewall 3) Updating system regularly 4) Not opening suspicious links."
-                        }
-                    };
+                    // إضافة مؤشر الكتابة
+                    messages.innerHTML += `
+                        <div class="ai-message ai-bot">
+                            <div class="typing-indicator">
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                            </div>
+                            جاري البحث عن الإجابة...
+                        </div>
+                    `;
                     
-                    let response = aiResponses[this.currentLanguage].default;
+                    messages.scrollTop = messages.scrollHeight;
                     
-                    // البحث عن أفضل رد بناءً على الكلمات المفتاحية
-                    for (const [keyword, answer] of Object.entries(aiResponses[this.currentLanguage])) {
-                        if (question.toLowerCase().includes(keyword.toLowerCase()) && keyword !== "default") {
-                            response = answer;
-                            break;
-                        }
-                    }
-                    
-                    setTimeout(() => {
+                    try {
+                        // استخدام API الذكاء الاصطناعي (محاكاة)
+                        const response = await this.getAIResponse(question);
+                        
+                        // إزالة مؤشر الكتابة
+                        messages.innerHTML = messages.innerHTML.replace(/<div class="ai-message ai-bot">[\s\S]*?جاري البحث عن الإجابة...<\/div>/, '');
+                        
+                        // إضافة رد الذكاء الاصطناعي
                         messages.innerHTML += `
                             <div class="ai-message ai-bot">
                                 ${response}
                             </div>
                         `;
-                        messages.scrollTop = messages.scrollHeight;
-                    }, 1000);
+                    } catch (error) {
+                        // إزالة مؤشر الكتابة
+                        messages.innerHTML = messages.innerHTML.replace(/<div class="ai-message ai-bot">[\s\S]*?جاري البحث عن الإجابة...<\/div>/, '');
+                        
+                        // إضافة رد بديل
+                        messages.innerHTML += `
+                            <div class="ai-message ai-bot">
+                                عذراً، حدث خطأ في الاتصال. إليك بعض النصائح العامة:<br><br>
+                                • استخدم كلمات مرور قوية وفريدة لكل حساب<br>
+                                • فعّل المصادقة الثنائية<br>
+                                • احرص على تحديث برامجك باستمرار<br>
+                                • تجنب فتح الروابط المشبوهة<br>
+                                • استخدم VPN على الشبكات العامة
+                            </div>
+                        `;
+                    }
                     
+                    messages.scrollTop = messages.scrollHeight;
                     input.value = '';
                 }
+            },
+            
+            async getAIResponse(question) {
+                // محاكاة استجابة الذكاء الاصطناعي مع قاعدة معرفية شاملة
+                const knowledgeBase = {
+                    ar: {
+                        "كلمة المرور": "لحماية حساباتك، استخدم كلمات مرور قوية تحتوي على مزيج من:<br>• أحرف كبيرة وصغيرة<br>• أرقام<br>• رموز خاصة (@#$%^&*)<br>• طول لا يقل عن 12 حرفاً<br>• تجنب استخدام المعلومات الشخصية<br>• استخدم مدير كلمات المرور",
+                        "التصيد": "لحماية نفسك من التصيد:<br>• افحص عنوان البريد الإلكتروني للمرسل<br>• انتبه للأخطاء الإملائية والنحوية<br>• لا تضغط على الروابط المشبوهة<br>• تحقق من عنوان URL قبل إدخال أي بيانات<br>• استخدم برامج مكافحة التصيد",
+                        "الفيروسات": "للحماية من الفيروسات والبرمجيات الخبيثة:<br>• استخدم برامج مكافحة فيروسات موثوقة<br>• حافظ على تحديث نظام التشغيل<br>• تجنب تحميل البرامج من مصادر غير موثوقة<br>• لا تفتح المرفقات المشبوهة<br>• استخدم جدار حماية",
+                        "الشبكات": "للأمان على الشبكات:<br>• استخدم VPN على الشبكات العامة<br>• فعّل جدار الحماية<br>• استخدم تشفير WPA2/WPA3 للواي فاي<br>• غير كلمة مرور الراوتر الافتراضية<br>• عطّل خوادم DHCP غير الضرورية",
+                        "التحديثات": "التحديثات الأمنية مهمة لأنها:<br>• تصلح الثغرات الأمنية المعروفة<br>• تحسن أداء النظام<br>• تضيف ميزات أمان جديدة<br>• تحمي من الهجمات الحديثة<br>• يجب تثبيتها فور توفرها",
+                        "النسخ الاحتياطي": "النسخ الاحتياطي يحمي بياناتك من:<br>• هجمات برامج الفدية<br>• فشل الأجهزة<br>• الحذف العرضي<br>• الكوارث الطبيعية<br>• استخدم قاعدة 3-2-1: 3 نسخ، على 2 وسائط مختلفة، 1 خارج الموقع",
+                        "default": "سؤال ممتاز! إليك نصائح أمنية عامة:<br><br>🔒 <strong>أساسيات الأمن:</strong><br>• استخدم كلمات مرور قوية وفريدة<br>• فعّل المصادقة الثنائية<br>• حافظ على تحديث البرامج<br><br>🛡️ <strong>الحماية من الهجمات:</strong><br>• استخدم برامج مكافحة الفيروسات<br>• انتبه لرسائل التصيد<br>• تجنب الشبكات العامة للعمليات الحساسة<br><br>📱 <strong>الأمن الرقمي:</strong><br>• احتفظ بنسخ احتياطية<br>• شفر بياناتك الحساسة<br>• استخدم VPN على الشبكات العامة"
+                    },
+                    en: {
+                        "password": "To protect your accounts, use strong passwords containing:<br>• Uppercase and lowercase letters<br>• Numbers<br>• Special symbols (@#$%^&*)<br>• Minimum 12 characters length<br>• Avoid personal information<br>• Use password manager",
+                        "phishing": "To protect yourself from phishing:<br>• Check sender's email address<br>• Watch for spelling and grammar errors<br>• Don't click suspicious links<br>• Verify URL before entering any data<br>• Use anti-phishing software",
+                        "virus": "To protect from viruses and malware:<br>• Use reliable antivirus software<br>• Keep operating system updated<br>• Avoid downloading software from untrusted sources<br>• Don't open suspicious attachments<br>• Use firewall",
+                        "network": "For network security:<br>• Use VPN on public networks<br>• Enable firewall<br>• Use WPA2/WPA3 encryption for WiFi<br>• Change default router password<br>• Disable unnecessary DHCP servers",
+                        "update": "Security updates are important because they:<br>• Fix known vulnerabilities<br>• Improve system performance<br>• Add new security features<br>• Protect from modern attacks<br>• Should be installed immediately when available",
+                        "backup": "Backup protects your data from:<br>• Ransomware attacks<br>• Hardware failure<br>• Accidental deletion<br>• Natural disasters<br>• Use 3-2-1 rule: 3 copies, on 2 different media, 1 off-site",
+                        "default": "Excellent question! Here are general security tips:<br><br>🔒 <strong>Security Basics:</strong><br>• Use strong unique passwords<br>• Enable two-factor authentication<br>• Keep software updated<br><br>🛡️ <strong>Attack Protection:</strong><br>• Use antivirus software<br>• Be careful with phishing messages<br>• Avoid public networks for sensitive operations<br><br>📱 <strong>Digital Security:</strong><br>• Keep backups<br>• Encrypt your sensitive data<br>• Use VPN on public networks"
+                    }
+                };
+                
+                // البحث عن أفضل رد
+                const lang = this.currentLanguage;
+                let response = knowledgeBase[lang].default;
+                
+                for (const [keyword, answer] of Object.entries(knowledgeBase[lang])) {
+                    if (question.toLowerCase().includes(keyword.toLowerCase()) && keyword !== "default") {
+                        response = answer;
+                        break;
+                    }
+                }
+                
+                // محاكاة وقت الانتظار للواقعية
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                return response;
             },
             
             updateStatsDisplay() {
