@@ -163,8 +163,8 @@
             box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4);
         }
 
-        /* واجهة الأسئلة المتقدمة */
-        .advanced-game-modal {
+        /* واجهة الأسئلة */
+        .game-modal {
             position: fixed;
             top: 0;
             left: 0;
@@ -178,7 +178,7 @@
             backdrop-filter: blur(5px);
         }
 
-        .advanced-game-content {
+        .game-content {
             background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
             padding: 30px;
             border-radius: 20px;
@@ -190,7 +190,7 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
-        .advanced-stats {
+        .game-stats {
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
@@ -199,7 +199,7 @@
             border-radius: 10px;
         }
 
-        .advanced-question {
+        .game-question {
             font-size: 1.3rem;
             margin-bottom: 25px;
             color: var(--text-color);
@@ -207,14 +207,14 @@
             text-align: center;
         }
 
-        .advanced-answers {
+        .game-answers {
             display: grid;
             grid-template-columns: 1fr;
             gap: 12px;
             margin-bottom: 25px;
         }
 
-        .advanced-answer-btn {
+        .game-answer-btn {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-color);
@@ -226,28 +226,28 @@
             font-size: 1rem;
         }
 
-        .advanced-answer-btn:hover {
+        .game-answer-btn:hover {
             background: rgba(255, 255, 255, 0.1);
             transform: translateX(-5px);
         }
 
-        .advanced-answer-btn.correct {
+        .game-answer-btn.correct {
             background: var(--success-color);
             color: white;
         }
 
-        .advanced-answer-btn.wrong {
+        .game-answer-btn.wrong {
             background: var(--error-color);
             color: white;
         }
 
-        .advanced-buttons {
+        .game-buttons {
             display: flex;
             gap: 10px;
             justify-content: center;
         }
 
-        .advanced-buttons button {
+        .game-buttons button {
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             color: #041025;
             border: none;
@@ -258,7 +258,7 @@
             transition: all 0.3s ease;
         }
 
-        .advanced-buttons button:hover {
+        .game-buttons button:hover {
             transform: translateY(-2px);
         }
 
@@ -529,8 +529,8 @@
     <div class="container">
         <div class="header">
             <div class="language-switch">
-                <button class="lang-btn active" onclick="zeroxEnhanced.switchLanguage('ar')">🌐 العربية</button>
-                <button class="lang-btn" onclick="zeroxEnhanced.switchLanguage('en')">🌐 English</button>
+                <button class="lang-btn active" onclick="gameManager.switchLanguage('ar')">🌐 العربية</button>
+                <button class="lang-btn" onclick="gameManager.switchLanguage('en')">🌐 English</button>
             </div>
             <h1>مدافع الأمن السيبراني</h1>
             <p>لعبة تعليمية عن الأمن السيبراني — فريق Zerox</p>
@@ -544,16 +544,16 @@
                     <p style="color: #94a3b8; margin-bottom: 20px;">احمِ الحسابات وتعلم أساسيات الحماية عبر أسئلة قصيرة وتحديات سريعة.</p>
                     
                     <div class="advanced-options">
-                        <button class="game-btn" onclick="zeroxEnhanced.startGame()">🎮 ابدأ اللعبة</button>
-                        <button class="game-btn" onclick="zeroxEnhanced.showHowToPlay()">📖 كيف تُلعب</button>
+                        <button class="game-btn" onclick="gameManager.startGame()">🎮 ابدأ اللعبة</button>
+                        <button class="game-btn" onclick="gameManager.showHowToPlay()">📖 كيف تُلعب</button>
                     </div>
                     
                     <div style="margin-top: 20px;">
                         <h4>اختر مستوى:</h4>
                         <div class="advanced-options">
-                            <button class="level-btn active" onclick="zeroxEnhanced.selectLevel('easy')">🟢 سهلة</button>
-                            <button class="level-btn" onclick="zeroxEnhanced.selectLevel('medium')">🟡 متوسطة</button>
-                            <button class="level-btn" onclick="zeroxEnhanced.selectLevel('hard')">🔴 صعبة</button>
+                            <button class="level-btn active" onclick="gameManager.selectLevel('easy')">🟢 سهلة</button>
+                            <button class="level-btn" onclick="gameManager.selectLevel('medium')">🟡 متوسطة</button>
+                            <button class="level-btn" onclick="gameManager.selectLevel('hard')">🔴 صعبة</button>
                         </div>
                     </div>
                 </div>
@@ -563,13 +563,13 @@
                         <h3>🎯 الوضع المتقدم</h3>
                         <p style="color: #94a3b8; margin-bottom: 15px;">استكشف ميزات إضافية وأسئلة متقدمة</p>
                         <div class="advanced-options">
-                            <button class="game-btn" onclick="zeroxEnhanced.startAdvancedQuestions()">
+                            <button class="game-btn" onclick="gameManager.startAdvancedQuestions()">
                                 🚀 الأسئلة المتقدمة
                             </button>
-                            <button class="game-btn" onclick="zeroxEnhanced.startDailyChallenge()">
+                            <button class="game-btn" onclick="gameManager.startDailyChallenge()">
                                 🏆 التحديات اليومية
                             </button>
-                            <button class="game-btn" onclick="zeroxEnhanced.showLeaderboard()">
+                            <button class="game-btn" onclick="gameManager.showLeaderboard()">
                                 📊 لوحة المتصدرين
                             </button>
                         </div>
@@ -591,9 +591,9 @@
                     <h3>🎯 مستوى اللعبة</h3>
                     <p style="color: #94a3b8; font-size: 0.9rem; margin: 10px 0;">اختر مستوى قبل البدء</p>
                     <div style="display: flex; gap: 10px;">
-                        <button class="level-btn active" onclick="zeroxEnhanced.selectLevel('easy')">سهل</button>
-                        <button class="level-btn" onclick="zeroxEnhanced.selectLevel('medium')">متوسط</button>
-                        <button class="level-btn" onclick="zeroxEnhanced.selectLevel('hard')">صعب</button>
+                        <button class="level-btn active" onclick="gameManager.selectLevel('easy')">سهل</button>
+                        <button class="level-btn" onclick="gameManager.selectLevel('medium')">متوسط</button>
+                        <button class="level-btn" onclick="gameManager.selectLevel('hard')">صعب</button>
                     </div>
                 </div>
                 
@@ -602,15 +602,15 @@
                     <p style="color: #94a3b8; font-size: 0.9rem; margin: 10px 0;">أعلى نتيجة</p>
                     <div style="text-align: center; font-size: 2rem; font-weight: bold; color: var(--primary-color); margin: 15px 0;" id="highScore">1250</div>
                     <div style="display: flex; gap: 10px;">
-                        <button class="game-btn" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;" onclick="zeroxEnhanced.deleteRecord()">🗑️ حذف السجل</button>
-                        <button class="game-btn" style="background: rgba(59, 130, 246, 0.2); color: #3b82f6;" onclick="zeroxEnhanced.copyScore()">📋 نسخ</button>
+                        <button class="game-btn" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;" onclick="gameManager.deleteRecord()">🗑️ حذف السجل</button>
+                        <button class="game-btn" style="background: rgba(59, 130, 246, 0.2); color: #3b82f6;" onclick="gameManager.copyScore()">📋 نسخ</button>
                     </div>
                 </div>
                 
                 <div class="card">
                     <h3>التحدي اليومي</h3>
                     <p style="color: #94a3b8; font-size: 0.9rem; margin: 10px 0;">اكسب 200 نقطة إضافية!</p>
-                    <button class="game-btn" style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); color: white; width: 100%;" onclick="zeroxEnhanced.startDailyChallenge()">
+                    <button class="game-btn" style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); color: white; width: 100%;" onclick="gameManager.startDailyChallenge()">
                         بدء التحدي
                     </button>
                 </div>
@@ -619,39 +619,250 @@
     </div>
 
     <script>
-        // zerox-enhanced.js - مضمن في الصفحة
-        console.log('🚀 Zerox Enhanced - جاهز للتحميل!');
-
-        class ZeroxEnhanced {
-            constructor() {
-                this.currentLanguage = 'ar';
-                this.currentLevel = 'easy';
-                this.advancedQuestions = this.loadAdvancedQuestions();
-                this.leaderboard = this.loadLeaderboard();
-                this.translations = this.loadTranslations();
-                this.init();
-            }
-
+        // نظام إدارة اللعبة
+        const gameManager = {
+            currentLanguage: 'ar',
+            currentLevel: 'easy',
+            currentQuestion: 0,
+            score: 0,
+            questions: [],
+            leaderboard: [],
+            
             init() {
-                this.updateAllTexts();
-                console.log('✅ Zerox Enhanced - تم التثبيت!');
+                this.loadQuestions();
+                this.loadLeaderboard();
                 this.showMessage('🎮 مرحباً بك في مدافع الأمن السيبراني!', 'success');
-            }
-
-            // الدوال الأساسية للعبة
+            },
+            
+            loadQuestions() {
+                this.questions = {
+                    easy: [
+                        {
+                            question: { ar: "ما هو أفضل كلمة مرور؟", en: "What is the best password?" },
+                            answers: {
+                                ar: ["123456", "password", "اسمك", "مزيج من أحرف وأرقام ورموز"],
+                                en: ["123456", "password", "your name", "combination of letters, numbers and symbols"]
+                            },
+                            correct: 3
+                        },
+                        {
+                            question: { ar: "ماذا يعني HTTPS في عنوان الموقع؟", en: "What does HTTPS mean in a website address?" },
+                            answers: {
+                                ar: ["نفس HTTP", "نسخة محسنة", "اتصال آمن", "نوع خادم"],
+                                en: ["Same as HTTP", "Enhanced version", "Secure connection", "Server type"]
+                            },
+                            correct: 2
+                        }
+                    ],
+                    medium: [
+                        {
+                            question: { ar: "ما هو التصيد الاحتيالي (Phishing)؟", en: "What is Phishing?" },
+                            answers: {
+                                ar: ["نوع من السمك", "هجوم برمجيات خبيثة", "احتيال لسرقة المعلومات", "تقنية تشفير"],
+                                en: ["A type of fish", "Malware attack", "Fraud to steal information", "Encryption technique"]
+                            },
+                            correct: 2
+                        }
+                    ],
+                    hard: [
+                        {
+                            question: { ar: "كيف يعمل هجوم DDoS؟", en: "How does a DDoS attack work?" },
+                            answers: {
+                                ar: ["باختراق كلمة المرور", "بإغراق الخادم بطلبات زائفة", "بسرقة البيانات", "بتشفير الملفات"],
+                                en: ["By cracking passwords", "By flooding the server with fake requests", "By stealing data", "By encrypting files"]
+                            },
+                            correct: 1
+                        }
+                    ],
+                    advanced: [
+                        {
+                            question: { ar: "ما الفرق بين IDS و IPS؟", en: "What is the difference between IDS and IPS?" },
+                            answers: {
+                                ar: ["نفس النظام", "IDS يرصد فقط، IPS يرصد ويمنع", "IDS للشبكات الصغيرة", "لا فرق"],
+                                en: ["Same system", "IDS only detects, IPS detects and prevents", "IDS for small networks", "No difference"]
+                            },
+                            correct: 1
+                        },
+                        {
+                            question: { ar: "ما هو Zero-Knowledge Proof؟", en: "What is Zero-Knowledge Proof?" },
+                            answers: {
+                                ar: ["إثبات بدون كشف المعلومات", "تشفير بدون مفتاح", "حذف البيانات", "مشاركة المعلومات"],
+                                en: ["Proof without revealing information", "Encryption without keys", "Data deletion", "Information sharing"]
+                            },
+                            correct: 0
+                        }
+                    ],
+                    daily: [
+                        {
+                            question: { ar: "ما هو أفضل طريقة للكشف عن هجوم DDoS؟", en: "What is the best method to detect a DDoS attack?" },
+                            answers: {
+                                ar: ["مراقبة النطاق الترددي", "فحص السجلات", "أنظمة كشف التسلل", "جميع ما سبق"],
+                                en: ["Monitor bandwidth", "Check logs", "Intrusion detection systems", "All of the above"]
+                            },
+                            correct: 3
+                        }
+                    ]
+                };
+            },
+            
+            loadLeaderboard() {
+                const saved = localStorage.getItem('cyber_defender_leaderboard');
+                this.leaderboard = saved ? JSON.parse(saved) : [
+                    { name: "حيدر", score: 1500 },
+                    { name: "أحمد", score: 1200 },
+                    { name: "محمد", score: 900 }
+                ];
+            },
+            
+            saveLeaderboard() {
+                localStorage.setItem('cyber_defender_leaderboard', JSON.stringify(this.leaderboard));
+            },
+            
+            // الدوال الأساسية
             startGame() {
-                this.showMessage('🎮 بدء اللعبة الجديدة! اختر مستوى وابدأ اللعب.', 'info');
-                // هنا يمكنك إضافة منطق بدء اللعبة الرئيسية
-            }
+                const questions = this.questions[this.currentLevel];
+                if (!questions || questions.length === 0) {
+                    this.showMessage('❌ لا توجد أسئلة متاحة لهذا المستوى', 'error');
+                    return;
+                }
+                
+                this.currentQuestion = 0;
+                this.score = 0;
+                this.showGameQuestion(questions, 'normal');
+            },
+            
+            startAdvancedQuestions() {
+                const questions = this.questions.advanced;
+                this.currentQuestion = 0;
+                this.score = 0;
+                this.showGameQuestion(questions, 'advanced');
+            },
+            
+            startDailyChallenge() {
+                const questions = this.questions.daily;
+                this.currentQuestion = 0;
+                this.score = 0;
+                this.showGameQuestion(questions, 'daily');
+            },
+            
+            showGameQuestion(questions, mode) {
+                if (this.currentQuestion >= questions.length) {
+                    this.finishGame(mode);
+                    return;
+                }
+                
+                const question = questions[this.currentQuestion];
+                const modal = document.createElement('div');
+                modal.className = 'game-modal';
+                modal.innerHTML = `
+                    <div class="game-content">
+                        <div class="game-stats">
+                            <span>${this.translate('score')}: ${this.score}</span>
+                            <span>${this.translate('question')}: ${this.currentQuestion + 1}/${questions.length}</span>
+                            <span>${this.translate('level')}: ${this.getLevelText(this.currentLevel)}</span>
+                        </div>
+                        
+                        <div class="game-question">
+                            ${question.question[this.currentLanguage]}
+                        </div>
+                        
+                        <div class="game-answers">
+                            ${question.answers[this.currentLanguage].map((answer, index) => `
+                                <button class="game-answer-btn" onclick="gameManager.checkAnswer(${index}, ${question.correct}, '${mode}')">
+                                    ${index + 1}. ${answer}
+                                </button>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="game-buttons">
+                            <button onclick="gameManager.closeModal()">${this.translate('close')}</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+            },
+            
+            checkAnswer(selected, correct, mode) {
+                const answerButtons = document.querySelectorAll('.game-answer-btn');
+                let points = 0;
+                
+                // تحديد النقاط بناء على المستوى
+                switch(this.currentLevel) {
+                    case 'easy': points = 50; break;
+                    case 'medium': points = 100; break;
+                    case 'hard': points = 200; break;
+                    default: points = 100;
+                }
+                
+                // إذا كان تحدي يومي
+                if (mode === 'daily') points = 200;
+                if (mode === 'advanced') points = 150;
+                
+                answerButtons.forEach((btn, index) => {
+                    if (index === correct) {
+                        btn.classList.add('correct');
+                    } else if (index === selected) {
+                        btn.classList.add('wrong');
+                    }
+                    btn.style.pointerEvents = 'none';
+                });
+                
+                if (selected === correct) {
+                    this.score += points;
+                    this.showMessage(`🎉 ${this.translate('correct')}! +${points} ${this.translate('points')}`, 'success');
+                } else {
+                    this.showMessage(`❌ ${this.translate('wrong')}!`, 'error');
+                }
 
+                setTimeout(() => {
+                    this.closeModal();
+                    this.currentQuestion++;
+                    
+                    const questions = mode === 'advanced' ? this.questions.advanced : 
+                                    mode === 'daily' ? this.questions.daily : 
+                                    this.questions[this.currentLevel];
+                    
+                    if (this.currentQuestion < questions.length) {
+                        this.showGameQuestion(questions, mode);
+                    } else {
+                        this.finishGame(mode);
+                    }
+                }, 2000);
+            },
+            
+            finishGame(mode) {
+                let message = '';
+                if (mode === 'daily') {
+                    message = `🏆 ${this.translate('challenge_completed')}! ${this.translate('score')}: ${this.score}`;
+                } else {
+                    message = `🏆 ${this.translate('game_completed')}! ${this.translate('score')}: ${this.score}`;
+                }
+                
+                this.showMessage(message, 'success');
+                
+                // تحديث أعلى نتيجة
+                const highScoreElement = document.getElementById('highScore');
+                const currentHighScore = parseInt(highScoreElement.textContent);
+                if (this.score > currentHighScore) {
+                    highScoreElement.textContent = this.score;
+                    this.showMessage('🎯 ' + this.translate('new_highscore'), 'success');
+                }
+            },
+            
+            closeModal() {
+                const modal = document.querySelector('.game-modal, .leaderboard-modal, .challenge-modal');
+                if (modal) modal.remove();
+            },
+            
             showHowToPlay() {
                 const rules = this.currentLanguage === 'ar' 
-                    ? "قواعد اللعبة:\n1. اختر مستوى الصعوبة\n2. أجب على الأسئلة\n3. احصل على النقاط\n4. تقدم في المستويات"
-                    : "Game Rules:\n1. Choose difficulty level\n2. Answer questions\n3. Earn points\n4. Advance through levels";
+                    ? "قواعد اللعبة:\n\n1. اختر مستوى الصعوبة\n2. أجب على الأسئلة بشكل صحيح\n3. احصل على النقاط:\n   - سهل: 50 نقطة\n   - متوسط: 100 نقطة\n   - صعب: 200 نقطة\n4. تقدم في المستويات\n5. شارك في التحديات اليومية"
+                    : "Game Rules:\n\n1. Choose difficulty level\n2. Answer questions correctly\n3. Earn points:\n   - Easy: 50 points\n   - Medium: 100 points\n   - Hard: 200 points\n4. Advance through levels\n5. Participate in daily challenges";
                 
                 alert(rules);
-            }
-
+            },
+            
             selectLevel(level) {
                 this.currentLevel = level;
                 
@@ -672,8 +883,8 @@
                         : `✅ Selected level: ${this.getLevelText(level)}`,
                     'success'
                 );
-            }
-
+            },
+            
             getLevelText(level) {
                 const levels = {
                     easy: { ar: 'سهل', en: 'Easy' },
@@ -681,8 +892,8 @@
                     hard: { ar: 'صعب', en: 'Hard' }
                 };
                 return levels[level][this.currentLanguage];
-            }
-
+            },
+            
             deleteRecord() {
                 if (confirm(this.currentLanguage === 'ar' ? 'هل تريد حذف السجل؟' : 'Delete record?')) {
                     document.getElementById('highScore').textContent = '0';
@@ -691,8 +902,8 @@
                         'info'
                     );
                 }
-            }
-
+            },
+            
             copyScore() {
                 const score = document.getElementById('highScore').textContent;
                 navigator.clipboard.writeText(score);
@@ -700,80 +911,78 @@
                     this.currentLanguage === 'ar' ? '📋 تم نسخ النتيجة' : '📋 Score copied',
                     'success'
                 );
-            }
-
-            loadAdvancedQuestions() {
-                return [
-                    {
-                        id: 1,
-                        question: {
-                            ar: "ما الفرق بين IDS و IPS في أمن الشبكات؟",
-                            en: "What is the difference between IDS and IPS in network security?"
-                        },
-                        answers: {
-                            ar: [
-                                "نفس النظام لكن بأسماء مختلفة",
-                                "IDS يرصد فقط، IPS يرصد ويمنع",
-                                "IDS للشبكات الصغيرة، IPS للكبيرة",
-                                "لا فرق تقني بينهما"
-                            ],
-                            en: [
-                                "Same system with different names",
-                                "IDS only detects, IPS detects and prevents",
-                                "IDS for small networks, IPS for large ones",
-                                "No technical difference"
-                            ]
-                        },
-                        correct: 1,
-                        explain: {
-                            ar: "IDS نظام كشف التسلل يرصد الهجمات فقط، بينما IPS نظام منع التسلل يرصد ويمنع الهجمات تلقائياً",
-                            en: "IDS (Intrusion Detection System) only detects attacks, while IPS (Intrusion Prevention System) detects and automatically blocks attacks"
-                        }
-                    },
-                    {
-                        id: 2,
-                        question: {
-                            ar: "ما هو هجوم Man-in-the-Middle وكيف يعمل؟",
-                            en: "What is a Man-in-the-Middle attack and how does it work?"
-                        },
-                        answers: {
-                            ar: [
-                                "اختراق الخوادم مباشرة",
-                                "اعتراض الاتصال بين طرفين",
-                                "تخمين كلمات المرور",
-                                "حقن أكواد خبيثة"
-                            ],
-                            en: [
-                                "Direct server hacking",
-                                "Intercepting communication between two parties",
-                                "Password guessing",
-                                "Malicious code injection"
-                            ]
-                        },
-                        correct: 1,
-                        explain: {
-                            ar: "المهاجم يعترض الاتصال بين الطرفين ويتظاهر بأنه كل منهما للطرف الآخر",
-                            en: "The attacker intercepts communication between two parties and pretends to be each one to the other"
-                        }
-                    }
-                ];
-            }
-
-            loadLeaderboard() {
-                const saved = localStorage.getItem('zerox_leaderboard');
-                return saved ? JSON.parse(saved) : [
-                    { name: "حيدر", score: 1500 },
-                    { name: "أحمد", score: 1200 },
-                    { name: "محمد", score: 900 }
-                ];
-            }
-
-            saveLeaderboard() {
-                localStorage.setItem('zerox_leaderboard', JSON.stringify(this.leaderboard));
-            }
-
-            loadTranslations() {
-                return {
+            },
+            
+            showLeaderboard() {
+                const modal = document.createElement('div');
+                modal.className = 'leaderboard-modal';
+                modal.innerHTML = `
+                    <div class="leaderboard-content">
+                        <h3>${this.translate('topPlayers')}</h3>
+                        <div class="leaderboard-list">
+                            ${this.leaderboard.map((player, index) => `
+                                <div class="leaderboard-item">
+                                    <div class="leaderboard-rank ${index < 3 ? 'rank-' + (index + 1) : ''}">
+                                        ${index + 1}
+                                    </div>
+                                    <div class="leaderboard-name">${player.name}</div>
+                                    <div class="leaderboard-score">${player.score} ${this.translate('points')}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(45, 212, 191, 0.1); border-radius: 8px;">
+                            <strong>${this.translate('yourScore')}:</strong> 
+                            <input type="text" id="playerName" placeholder="${this.translate('player')}" style="margin: 0 10px; padding: 5px; border: none; border-radius: 4px; background: rgba(255,255,255,0.1); color: white;">
+                            <input type="number" id="playerScore" placeholder="0" style="margin: 0 10px; padding: 5px; border: none; border-radius: 4px; background: rgba(255,255,255,0.1); color: white; width: 80px;">
+                            <button onclick="gameManager.addToLeaderboard()" style="background: #2dd4bf; color: #041025; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+                                ${this.translate('addPlayer')}
+                            </button>
+                        </div>
+                        <div class="challenge-buttons" style="margin-top: 20px;">
+                            <button onclick="gameManager.closeModal()">${this.translate('close')}</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+            },
+            
+            addToLeaderboard() {
+                const nameInput = document.getElementById('playerName');
+                const scoreInput = document.getElementById('playerScore');
+                
+                const name = nameInput.value.trim();
+                const score = parseInt(scoreInput.value);
+                
+                if (name && !isNaN(score)) {
+                    this.leaderboard.push({ name, score });
+                    this.leaderboard.sort((a, b) => b.score - a.score);
+                    this.leaderboard = this.leaderboard.slice(0, 10);
+                    this.saveLeaderboard();
+                    this.closeModal();
+                    this.showLeaderboard();
+                    this.showMessage('✅ ' + (this.currentLanguage === 'ar' ? 'تم إضافة اللاعب!' : 'Player added!'), 'success');
+                }
+            },
+            
+            switchLanguage(lang) {
+                this.currentLanguage = lang;
+                document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+                document.documentElement.lang = lang;
+                
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelector(`.lang-btn[onclick="gameManager.switchLanguage('${lang}')"]`).classList.add('active');
+                
+                this.updateTexts();
+                this.showMessage(
+                    lang === 'ar' ? '🌐 تم التبديل إلى اللغة العربية' : '🌐 Switched to English',
+                    'success'
+                );
+            },
+            
+            updateTexts() {
+                // ترجمة النصوص الأساسية
+                const translations = {
                     ar: {
                         title: "مدافع الأمن السيبراني",
                         subtitle: "لعبة تعليمية عن الأمن السيبراني — فريق Zerox",
@@ -789,6 +998,7 @@
                         progress: "📈 التقدم",
                         levelInfo: "مستوى واحد = 5 أسئلة",
                         question: "السؤال",
+                        level: "المستوى",
                         gameLevel: "🎯 مستوى اللعبة",
                         chooseLevelDesc: "اختر مستوى قبل البدء",
                         highscore: "⭐ سجل اللعبة",
@@ -812,7 +1022,12 @@
                         player: "اللاعب",
                         points: "النقاط",
                         yourScore: "نتيجتك",
-                        addPlayer: "إضافة لاعب"
+                        addPlayer: "إضافة لاعب",
+                        correct: "إجابة صحيحة",
+                        wrong: "إجابة خاطئة",
+                        game_completed: "اكتملت اللعبة",
+                        challenge_completed: "اكتمل التحدي",
+                        new_highscore: "رقم قياسي جديد!"
                     },
                     en: {
                         title: "Cyber Defender",
@@ -829,6 +1044,7 @@
                         progress: "📈 Progress", 
                         levelInfo: "One level = 5 questions",
                         question: "Question",
+                        level: "Level",
                         gameLevel: "🎯 Game Level",
                         chooseLevelDesc: "Choose level before starting",
                         highscore: "⭐ Highscore",
@@ -852,307 +1068,35 @@
                         player: "Player",
                         points: "Points",
                         yourScore: "Your Score",
-                        addPlayer: "Add Player"
+                        addPlayer: "Add Player",
+                        correct: "Correct",
+                        wrong: "Wrong",
+                        game_completed: "Game completed",
+                        challenge_completed: "Challenge completed",
+                        new_highscore: "New high score!"
                     }
                 };
-            }
-
-            switchLanguage(lang) {
-                this.currentLanguage = lang;
-                document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-                document.documentElement.lang = lang;
-                document.title = this.translate('title');
                 
-                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-                document.querySelector(`.lang-btn[onclick="zeroxEnhanced.switchLanguage('${lang}')"]`).classList.add('active');
+                this.translations = translations;
                 
-                this.updateAllTexts();
-                this.showMessage(
-                    lang === 'ar' ? '🌐 تم التبديل إلى اللغة العربية' : '🌐 Switched to English',
-                    'success'
-                );
-            }
-
-            updateAllTexts() {
-                // تحديث كل النصوص في الصفحة
-                const elements = {
-                    '.header h1': 'title',
-                    '.header p': 'subtitle',
-                    '.header p:last-child': 'designer',
-                    '.content-area .card:first-child h3': 'welcome',
-                    '.content-area .card:first-child p': 'welcomeDesc',
-                    '.content-area .card:first-child h4': 'chooseLevel',
-                    '.sidebar .card:nth-child(1) h3': 'progress',
-                    '.sidebar .card:nth-child(1) p': 'levelInfo',
-                    '.sidebar .card:nth-child(2) h3': 'gameLevel',
-                    '.sidebar .card:nth-child(2) p': 'chooseLevelDesc',
-                    '.sidebar .card:nth-child(3) h3': 'highscore',
-                    '.sidebar .card:nth-child(3) p': 'highscoreDesc',
-                    '.sidebar .card:nth-child(4) h3': 'dailyChallenge',
-                    '.sidebar .card:nth-child(4) p': 'challengeDesc',
-                    '.advanced-section h3': 'advancedMode',
-                    '.advanced-section p': 'advancedDesc'
-                };
-
-                for (const [selector, key] of Object.entries(elements)) {
-                    const element = document.querySelector(selector);
-                    if (element) element.textContent = this.translate(key);
+                // تحديث النصوص في الصفحة
+                for (const key in translations[this.currentLanguage]) {
+                    const elements = document.querySelectorAll(`[data-translate="${key}"]`);
+                    elements.forEach(el => {
+                        el.textContent = translations[this.currentLanguage][key];
+                    });
                 }
-
-                // تحديث الأزرار
-                const buttons = {
-                    '.game-btn:nth-child(1)': 'startGame',
-                    '.game-btn:nth-child(2)': 'howToPlay',
-                    '.advanced-section .game-btn:nth-child(1)': 'advancedQuestions',
-                    '.advanced-section .game-btn:nth-child(2)': 'achievements',
-                    '.advanced-section .game-btn:nth-child(3)': 'leaderboard',
-                    '.sidebar .card:last-child .game-btn': 'startChallenge',
-                    '.sidebar .card:nth-child(3) .game-btn:nth-child(1)': 'deleteRecord',
-                    '.sidebar .card:nth-child(3) .game-btn:nth-child(2)': 'copy'
-                };
-
-                for (const [selector, key] of Object.entries(buttons)) {
-                    const element = document.querySelector(selector);
-                    if (element) element.textContent = this.translate(key);
-                }
-
-                // تحديث أزرار المستويات
-                document.querySelectorAll('.level-btn').forEach((btn, index) => {
-                    const levels = ['easy', 'medium', 'hard'];
-                    if (levels[index]) {
-                        btn.textContent = this.translate(levels[index]);
-                    }
-                });
-            }
-
+                
+                // تحديث النصوص الثابتة
+                document.querySelector('h1').textContent = translations[this.currentLanguage].title;
+                document.querySelector('.header p').textContent = translations[this.currentLanguage].subtitle;
+                document.querySelector('.header p:last-child').textContent = translations[this.currentLanguage].designer;
+            },
+            
             translate(key) {
-                return this.translations[this.currentLanguage]?.[key] || key;
-            }
-
-            startAdvancedQuestions() {
-                this.currentAdvancedQuestion = 0;
-                this.advancedScore = 0;
-                this.showAdvancedQuestion();
-            }
-
-            showAdvancedQuestion() {
-                const question = this.advancedQuestions[this.currentAdvancedQuestion];
-                if (!question) {
-                    this.finishAdvancedGame();
-                    return;
-                }
-
-                const modal = document.createElement('div');
-                modal.className = 'advanced-game-modal';
-                modal.innerHTML = `
-                    <div class="advanced-game-content">
-                        <div class="advanced-stats">
-                            <span>${this.translate('score')}: ${this.advancedScore}</span>
-                            <span>${this.translate('question')}: ${this.currentAdvancedQuestion + 1}/${this.advancedQuestions.length}</span>
-                        </div>
-                        
-                        <div class="advanced-question">
-                            ${question.question[this.currentLanguage]}
-                        </div>
-                        
-                        <div class="advanced-answers">
-                            ${question.answers[this.currentLanguage].map((answer, index) => `
-                                <button class="advanced-answer-btn" onclick="zeroxEnhanced.checkAdvancedAnswer(${index})">
-                                    ${index + 1}. ${answer}
-                                </button>
-                            `).join('')}
-                        </div>
-                        
-                        <div class="advanced-buttons">
-                            <button onclick="zeroxEnhanced.closeAdvancedGame()">${this.translate('close')}</button>
-                        </div>
-                    </div>
-                `;
-                
-                document.body.appendChild(modal);
-            }
-
-            checkAdvancedAnswer(selected) {
-                const question = this.advancedQuestions[this.currentAdvancedQuestion];
-                const correct = question.correct;
-                const answerButtons = document.querySelectorAll('.advanced-answer-btn');
-                
-                // إظهار الإجابة الصحيحة والخاطئة
-                answerButtons.forEach((btn, index) => {
-                    if (index === correct) {
-                        btn.classList.add('correct');
-                    } else if (index === selected) {
-                        btn.classList.add('wrong');
-                    }
-                    btn.style.pointerEvents = 'none';
-                });
-                
-                if (selected === correct) {
-                    this.advancedScore += 100;
-                    this.showMessage('🎉 ' + (this.currentLanguage === 'ar' ? 'إجابة صحيحة! +100 نقطة' : 'Correct answer! +100 points'), 'success');
-                } else {
-                    this.showMessage('❌ ' + (this.currentLanguage === 'ar' ? 'إجابة خاطئة' : 'Wrong answer'), 'error');
-                }
-
-                setTimeout(() => {
-                    this.currentAdvancedQuestion++;
-                    this.closeAdvancedGame();
-                    if (this.currentAdvancedQuestion < this.advancedQuestions.length) {
-                        this.showAdvancedQuestion();
-                    } else {
-                        this.finishAdvancedGame();
-                    }
-                }, 2000);
-            }
-
-            closeAdvancedGame() {
-                const modal = document.querySelector('.advanced-game-modal');
-                if (modal) modal.remove();
-            }
-
-            finishAdvancedGame() {
-                this.showMessage(
-                    this.currentLanguage === 'ar' 
-                        ? `🏆 إنتهت الأسئلة المتقدمة! النقاط: ${this.advancedScore}`
-                        : `🏆 Advanced questions finished! Score: ${this.advancedScore}`,
-                    'success'
-                );
-            }
-
-            showLeaderboard() {
-                const modal = document.createElement('div');
-                modal.className = 'leaderboard-modal';
-                modal.innerHTML = `
-                    <div class="leaderboard-content">
-                        <h3>${this.translate('topPlayers')}</h3>
-                        <div class="leaderboard-list">
-                            ${this.leaderboard.map((player, index) => `
-                                <div class="leaderboard-item">
-                                    <div class="leaderboard-rank ${index < 3 ? 'rank-' + (index + 1) : ''}">
-                                        ${index + 1}
-                                    </div>
-                                    <div class="leaderboard-name">${player.name}</div>
-                                    <div class="leaderboard-score">${player.score} ${this.translate('points')}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div style="margin-top: 20px; padding: 15px; background: rgba(45, 212, 191, 0.1); border-radius: 8px;">
-                            <strong>${this.translate('yourScore')}:</strong> 
-                            <input type="text" id="playerName" placeholder="${this.translate('player')}" style="margin: 0 10px; padding: 5px; border: none; border-radius: 4px; background: rgba(255,255,255,0.1); color: white;">
-                            <input type="number" id="playerScore" placeholder="0" style="margin: 0 10px; padding: 5px; border: none; border-radius: 4px; background: rgba(255,255,255,0.1); color: white; width: 80px;">
-                            <button onclick="zeroxEnhanced.addToLeaderboard()" style="background: #2dd4bf; color: #041025; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
-                                ${this.translate('addPlayer')}
-                            </button>
-                        </div>
-                        <div class="challenge-buttons" style="margin-top: 20px;">
-                            <button onclick="zeroxEnhanced.closeLeaderboard()">${this.translate('close')}</button>
-                        </div>
-                    </div>
-                `;
-                
-                document.body.appendChild(modal);
-            }
-
-            addToLeaderboard() {
-                const nameInput = document.getElementById('playerName');
-                const scoreInput = document.getElementById('playerScore');
-                
-                const name = nameInput.value.trim();
-                const score = parseInt(scoreInput.value);
-                
-                if (name && !isNaN(score)) {
-                    this.leaderboard.push({ name, score });
-                    this.leaderboard.sort((a, b) => b.score - a.score);
-                    this.leaderboard = this.leaderboard.slice(0, 10);
-                    this.saveLeaderboard();
-                    this.closeLeaderboard();
-                    this.showLeaderboard();
-                    this.showMessage('✅ ' + (this.currentLanguage === 'ar' ? 'تم إضافة اللاعب!' : 'Player added!'), 'success');
-                }
-            }
-
-            closeLeaderboard() {
-                const modal = document.querySelector('.leaderboard-modal');
-                if (modal) modal.remove();
-            }
-
-            startDailyChallenge() {
-                const challenge = {
-                    question: {
-                        ar: "ما هو أفضل طريقة للكشف عن هجوم DDoS؟",
-                        en: "What is the best method to detect a DDoS attack?"
-                    },
-                    answers: {
-                        ar: [
-                            "مراقبة استهلاك النطاق الترددي",
-                            "فحص سجلات النظام",
-                            "استخدام أنظمة كشف التسلل",
-                            "جميع ما سبق"
-                        ],
-                        en: [
-                            "Monitor bandwidth consumption",
-                            "Check system logs", 
-                            "Use intrusion detection systems",
-                            "All of the above"
-                        ]
-                    },
-                    correct: 3,
-                    reward: 200
-                };
-                
-                this.showChallengeModal(challenge);
-            }
-
-            showChallengeModal(challenge) {
-                const modal = document.createElement('div');
-                modal.className = 'challenge-modal';
-                modal.innerHTML = `
-                    <div class="challenge-content">
-                        <h3>${this.translate('dailyChallenge')}</h3>
-                        <div class="challenge-question">
-                            ${challenge.question[this.currentLanguage]}
-                        </div>
-                        <div class="challenge-answers">
-                            ${challenge.answers[this.currentLanguage].map((answer, index) => `
-                                <div class="challenge-answer" onclick="zeroxEnhanced.checkChallengeAnswer(${index}, ${challenge.correct})">
-                                    ${index + 1}. ${answer}
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div class="challenge-buttons">
-                            <button onclick="zeroxEnhanced.closeChallenge()">${this.translate('close')}</button>
-                        </div>
-                    </div>
-                `;
-                
-                document.body.appendChild(modal);
-            }
-
-            checkChallengeAnswer(selected, correct) {
-                const answerElements = document.querySelectorAll('.challenge-answer');
-                
-                answerElements.forEach((el, index) => {
-                    if (index === correct) {
-                        el.classList.add('correct');
-                    } else if (index === selected) {
-                        el.classList.add('wrong');
-                    }
-                    el.style.pointerEvents = 'none';
-                });
-                
-                if (selected === correct) {
-                    this.showMessage('🎉 ' + (this.currentLanguage === 'ar' ? 'إجابة صحيحة! +200 نقطة' : 'Correct answer! +200 points'), 'success');
-                    setTimeout(() => this.closeChallenge(), 1500);
-                } else {
-                    this.showMessage('❌ ' + (this.currentLanguage === 'ar' ? 'إجابة خاطئة!' : 'Wrong answer!'), 'error');
-                }
-            }
-
-            closeChallenge() {
-                const modal = document.querySelector('.challenge-modal');
-                if (modal) modal.remove();
-            }
-
+                return this.translations?.[this.currentLanguage]?.[key] || key;
+            },
+            
             showMessage(message, type = 'info') {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = `enhanced-message ${type}`;
@@ -1165,11 +1109,12 @@
                     }
                 }, 3000);
             }
-        }
+        };
 
-        // تشغيل النظام عند تحميل الصفحة
+        // بدء اللعبة عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', function() {
-            window.zeroxEnhanced = new ZeroxEnhanced();
+            gameManager.init();
+            gameManager.updateTexts();
         });
     </script>
 </body>
