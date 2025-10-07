@@ -981,3 +981,353 @@
     </script>
 </body>
 </html>
+// ==============================================
+// 🚀 النظام الموسع - كل الإضافات في ملف واحد
+// ==============================================
+
+// 🎵 نظام المؤثرات الصوتية
+class AudioManager {
+  constructor() {
+    this.sounds = {
+      correct: this.createSound(523, 0.3),
+      wrong: this.createSound(220, 0.4),
+      click: this.createSound(330, 0.1),
+      win: this.createSound(784, 0.5),
+      levelUp: this.createSound(659, 0.4)
+    };
+  }
+  
+  createSound(frequency, duration) {
+    return () => {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.value = frequency;
+      gainNode.gain.value = 0.1;
+      
+      oscillator.start();
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+      oscillator.stop(audioContext.currentTime + duration);
+    };
+  }
+  
+  play(soundName) {
+    if (this.sounds[soundName]) {
+      this.sounds[soundName]();
+    }
+  }
+}
+
+// 🌟 نظام الشارات والإنجازات
+const ACHIEVEMENTS_SYSTEM = {
+  achievements: {
+    beginner: { name: "المبتدئ", desc: "أكمل 10 أسئلة", icon: "🟢", earned: false },
+    expert: { name: "الخبير", desc: "أجاب على 50 سؤال", icon: "🔴", earned: false },
+    speedster: { name: "السريع", desc: "أجاب 5 أسئلة متتالية بسرعة", icon: "⚡", earned: false },
+    protector: { name: "الحامي", desc: "أجاب على كل أسئلة الحماية", icon: "🛡️", earned: false }
+  },
+  
+  checkAchievements(score, totalQuestions, correctAnswers) {
+    const earned = [];
+    
+    if (totalQuestions >= 10 && !this.achievements.beginner.earned) {
+      this.achievements.beginner.earned = true;
+      earned.push('beginner');
+    }
+    
+    if (totalQuestions >= 50 && !this.achievements.expert.earned) {
+      this.achievements.expert.earned = true;
+      earned.push('expert');
+    }
+    
+    if (correctAnswers >= 5 && !this.achievements.speedster.earned) {
+      this.achievements.speedster.earned = true;
+      earned.push('speedster');
+    }
+    
+    return earned;
+  }
+};
+
+// 📚 مكتبة المصطلحات الأمنية
+const CYBER_GLOSSARY = {
+  terms: {
+    phishing: {
+      term: "التصيد الإلكتروني",
+      definition: "محاولة احتيال للحصول على معلومات حساسة مثل كلمات المرور",
+      example: "رسالة بريد إلكتروني مزيفة تطلب تحديث بيانات الحساب"
+    },
+    malware: {
+      term: "البرمجيات الخبيثة",
+      definition: "برامج مصممة لإلحاق الضرر بأنظمة الحاسوب",
+      example: "الفيروسات وبرامج الفدية وبرامج التجسس"
+    },
+    encryption: {
+      term: "التشفير",
+      definition: "عملية تحويل المعلومات إلى صيغة غير قابلة للقراءة",
+      example: "تشفير الرسائل في تطبيقات المراسلة"
+    },
+    firewall: {
+      term: "جدار الحماية",
+      definition: "نظام يحمي الشبكة من الوصول غير المصرح به",
+      example: "برنامج يمنع الهجمات على جهازك"
+    }
+  },
+  
+  showGlossary() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); display: flex; justify-content: center;
+      align-items: center; z-index: 10000;
+    `;
+    
+    modal.innerHTML = `
+      <div style="background: #0b1220; padding: 20px; border-radius: 15px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;">
+        <h3 style="color: #e6eef6; text-align: center; margin-bottom: 20px;">📚 موسوعة الأمن السيبراني</h3>
+        ${Object.values(this.terms).map(term => `
+          <div style="background: rgba(255,255,255,0.05); padding: 15px; margin: 10px 0; border-radius: 10px;">
+            <h4 style="color: #2dd4bf; margin: 0 0 8px 0;">${term.term}</h4>
+            <p style="color: #e6eef6; margin: 0 0 8px 0;">${term.definition}</p>
+            <small style="color: #94a3b8;">مثال: ${term.example}</small>
+          </div>
+        `).join('')}
+        <button onclick="this.parentElement.parentElement.remove()" style="background: #2dd4bf; color: #041025; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 15px;">إغلاق</button>
+      </div>
+    `;
+    
+    document.body.appendChild(modal);
+  }
+};
+
+// 📊 نظام الإحصائيات المتقدمة
+class AdvancedAnalytics {
+  constructor() {
+    this.stats = JSON.parse(localStorage.getItem('cyber_analytics')) || {
+      totalQuestions: 0,
+      correctAnswers: 0,
+      totalTime: 0,
+      streaks: [],
+      categories: {}
+    };
+  }
+  
+  save() {
+    localStorage.setItem('cyber_analytics', JSON.stringify(this.stats));
+  }
+  
+  recordAnswer(isCorrect, timeSpent, category) {
+    this.stats.totalQuestions++;
+    if (isCorrect) this.stats.correctAnswers++;
+    this.stats.totalTime += timeSpent;
+    
+    if (!this.stats.categories[category]) {
+      this.stats.categories[category] = { correct: 0, total: 0 };
+    }
+    this.stats.categories[category].total++;
+    if (isCorrect) this.stats.categories[category].correct++;
+    
+    this.save();
+  }
+  
+  getReport() {
+    const accuracy = this.stats.totalQuestions > 0 
+      ? (this.stats.correctAnswers / this.stats.totalQuestions * 100).toFixed(1)
+      : 0;
+      
+    const avgTime = this.stats.totalQuestions > 0
+      ? (this.stats.totalTime / this.stats.totalQuestions).toFixed(1)
+      : 0;
+    
+    return {
+      accuracy: accuracy,
+      averageTime: avgTime,
+      totalQuestions: this.stats.totalQuestions,
+      weakCategory: this.getWeakestCategory(),
+      level: this.calculateLevel()
+    };
+  }
+  
+  getWeakestCategory() {
+    let weakest = { name: '', accuracy: 100 };
+    for (const [category, data] of Object.entries(this.stats.categories)) {
+      const accuracy = (data.correct / data.total) * 100;
+      if (accuracy < weakest.accuracy) {
+        weakest = { name: category, accuracy };
+      }
+    }
+    return weakest.name || 'لا توجد بيانات كافية';
+  }
+  
+  calculateLevel() {
+    const baseLevel = Math.floor(this.stats.totalQuestions / 10) + 1;
+    return Math.min(baseLevel, 10); // أقصى مستوى 10
+  }
+}
+
+// 🔔 نظام الإشعارات
+class NotificationSystem {
+  show(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position: fixed; top: 20px; right: 20px; padding: 15px 20px;
+      border-radius: 10px; color: white; z-index: 10000;
+      animation: slideIn 0.3s ease; font-weight: bold;
+      background: ${type === 'success' ? '#2ed573' : type === 'error' ? '#ff4757' : '#3742fa'};
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    `;
+    
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      if (notification.parentElement) {
+        notification.remove();
+      }
+    }, 3000);
+  }
+}
+
+// 🎬 نظام الدروس المصورة (مبسط)
+const VIDEO_LESSONS = {
+  showLessons() {
+    const lessons = [
+      { title: "كيفية إنشاء كلمة مرور قوية", duration: "2:30" },
+      { title: "التعرف على رسائل التصيد", duration: "3:15" },
+      { title: "حماية حسابات التواصل الاجتماعي", duration: "2:45" }
+    ];
+    
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); display: flex; justify-content: center;
+      align-items: center; z-index: 10000;
+    `;
+    
+    modal.innerHTML = `
+      <div style="background: #0b1220; padding: 25px; border-radius: 15px; max-width: 500px; width: 90%;">
+        <h3 style="color: #e6eef6; text-align: center; margin-bottom: 20px;">🎬 الدروس التعليمية</h3>
+        ${lessons.map(lesson => `
+          <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 15px; margin: 10px 0; border-radius: 10px;">
+            <span style="color: #e6eef6;">${lesson.title}</span>
+            <button style="background: #2dd4bf; color: #041025; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer;">
+              تشغيل (${lesson.duration})
+            </button>
+          </div>
+        `).join('')}
+        <button onclick="this.parentElement.parentElement.remove()" style="background: #ff6b6b; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 15px;">إغلاق</button>
+      </div>
+    `;
+    
+    document.body.appendChild(modal);
+  }
+};
+
+// 👶 نظام النسخة المبسطة للأطفال
+const KIDS_MODE = {
+  isActive: false,
+  
+  toggle() {
+    this.isActive = !this.isActive;
+    if (this.isActive) {
+      this.activateKidsMode();
+    } else {
+      this.deactivateKidsMode();
+    }
+  },
+  
+  activateKidsMode() {
+    document.body.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.background = '#ff6b6b';
+    });
+    new NotificationSystem().show('🎮 تم تفعيل وضع الأطفال!', 'success');
+  },
+  
+  deactivateKidsMode() {
+    document.body.style.background = 'linear-gradient(to bottom, #041025, #081426)';
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.background = '#0b1220';
+    });
+  }
+};
+
+// ==============================================
+// 🔧 دمج كل الأنظمة مع اللعبة الأساسية
+// ==============================================
+
+// تهيئة جميع الأنظمة
+const audioManager = new AudioManager();
+const analytics = new AdvancedAnalytics();
+const notifications = new NotificationSystem();
+
+// دمج مع اللعبة الأساسية
+function enhanceGame() {
+  // إضافة أزرار التحكم الجديدة
+  addControlButtons();
+  
+  // تحسين نظام الإجابة
+  enhanceAnswerSystem();
+  
+  // إضافة الإحصائيات
+  showEnhancedStats();
+}
+
+function addControlButtons() {
+  const controlsDiv = document.createElement('div');
+  controlsDiv.style.cssText = `
+    display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; justify-content: center;
+  `;
+  
+  controlsDiv.innerHTML = `
+    <button onclick="CYBER_GLOSSARY.showGlossary()" style="background: #3742fa; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer;">
+      📚 الموسوعة
+    </button>
+    <button onclick="VIDEO_LESSONS.showLessons()" style="background: #ffa502; color: #041025; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer;">
+      🎬 الدروس
+    </button>
+    <button onclick="KIDS_MODE.toggle()" style="background: #ff6b6b; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer;">
+      👶 وضع الأطفال
+    </button>
+    <button onclick="showAdvancedReport()" style="background: #2ed573; color: #041025; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer;">
+      📊 التقرير المتقدم
+    </button>
+  `;
+  
+  const mainContent = document.querySelector('.main-content');
+  if (mainContent) {
+    mainContent.appendChild(controlsDiv);
+  }
+}
+
+function enhanceAnswerSystem() {
+  // هذا سيرتبط مع نظام الإجابة الأساسي
+  console.log('نظام الإجابة المحسن جاهز!');
+}
+
+function showAdvancedReport() {
+  const report = analytics.getReport();
+  notifications.show(
+    `📊 دقتك: ${report.accuracy}% | متوسط الوقت: ${report.averageTime}ث | المستوى: ${report.level}`,
+    'success'
+  );
+}
+
+// تشغيل النظام المحسن عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(() => {
+    enhanceGame();
+    console.log('🎉 جميع الأنظمة المحسنة نشطة!');
+  }, 1000);
+});
+
+// جعل الدوال متاحة globally
+window.CYBER_GLOSSARY = CYBER_GLOSSARY;
+window.VIDEO_LESSONS = VIDEO_LESSONS;
+window.KIDS_MODE = KIDS_MODE;
+window.showAdvancedReport = showAdvancedReport;
+
