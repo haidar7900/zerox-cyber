@@ -9,6 +9,65 @@
     
     <!-- تنسيقات الإضافات الجديدة -->
     <style>
+        :root {
+            --primary-color: #2dd4bf;
+            --secondary-color: #a78bfa;
+            --dark-bg: #0b1220;
+            --darker-bg: #07101b;
+            --text-color: #e6eef6;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --success-color: #2ed573;
+            --error-color: #ff6b6b;
+            --warning-color: #ffa502;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
+            color: var(--text-color);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
         .language-switch {
             position: absolute;
             top: 20px;
@@ -20,8 +79,8 @@
 
         .lang-btn {
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #e6eef6;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
             padding: 8px 15px;
             border-radius: 8px;
             cursor: pointer;
@@ -36,15 +95,48 @@
         }
 
         .lang-btn.active {
-            background: linear-gradient(45deg, #2dd4bf, #a78bfa);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             color: #041025;
             font-weight: bold;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
         }
 
         .advanced-section {
             margin-top: 25px;
             padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--border-color);
         }
 
         .advanced-options {
@@ -55,7 +147,7 @@
         }
 
         .advanced-options button {
-            background: linear-gradient(45deg, #2dd4bf, #a78bfa);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             color: #041025;
             border: none;
             padding: 12px 20px;
@@ -89,14 +181,14 @@
         }
 
         .advanced-game-content {
-            background: linear-gradient(135deg, #0b1220, #07101b);
+            background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
             padding: 30px;
             border-radius: 20px;
             max-width: 600px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
@@ -105,14 +197,14 @@
             justify-content: space-between;
             margin-bottom: 20px;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             border-radius: 10px;
         }
 
         .advanced-question {
             font-size: 1.3rem;
             margin-bottom: 25px;
-            color: #e6eef6;
+            color: var(--text-color);
             line-height: 1.6;
             text-align: center;
         }
@@ -125,9 +217,9 @@
         }
 
         .advanced-answer-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #e6eef6;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
             padding: 15px;
             border-radius: 10px;
             cursor: pointer;
@@ -148,7 +240,7 @@
         }
 
         .advanced-buttons button {
-            background: linear-gradient(45deg, #2dd4bf, #a78bfa);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             color: #041025;
             border: none;
             padding: 12px 25px;
@@ -173,14 +265,14 @@
         }
 
         .leaderboard-content {
-            background: linear-gradient(135deg, #0b1220, #07101b);
+            background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
             padding: 30px;
             border-radius: 20px;
             max-width: 500px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
@@ -194,9 +286,9 @@
             align-items: center;
             padding: 12px 15px;
             margin: 8px 0;
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
         }
 
         .leaderboard-rank {
@@ -217,7 +309,7 @@
 
         .leaderboard-score {
             font-weight: bold;
-            color: #2dd4bf;
+            color: var(--primary-color);
         }
 
         /* نافذة التحدي اليومي */
@@ -236,19 +328,19 @@
         }
 
         .challenge-content {
-            background: linear-gradient(135deg, #0b1220, #07101b);
+            background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
             padding: 30px;
             border-radius: 20px;
             max-width: 500px;
             width: 90%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         .challenge-question {
             font-size: 1.2rem;
             margin-bottom: 20px;
-            color: #e6eef6;
+            color: var(--text-color);
             line-height: 1.5;
         }
 
@@ -260,9 +352,9 @@
         }
 
         .challenge-answer {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #e6eef6;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
             padding: 15px;
             border-radius: 10px;
             cursor: pointer;
@@ -282,7 +374,7 @@
         }
 
         .challenge-buttons button {
-            background: linear-gradient(45deg, #2dd4bf, #a78bfa);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             color: #041025;
             border: none;
             padding: 10px 20px;
@@ -305,11 +397,11 @@
         }
 
         .enhanced-message.success {
-            background: linear-gradient(45deg, #2ed573, #1dd1a1);
+            background: linear-gradient(45deg, var(--success-color), #1dd1a1);
         }
 
         .enhanced-message.error {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            background: linear-gradient(45deg, var(--error-color), #ee5a24);
         }
 
         .enhanced-message.info {
@@ -325,6 +417,21 @@
                 transform: translateX(0);
                 opacity: 1;
             }
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--card-bg);
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            transition: width 0.5s ease;
         }
 
         @media (max-width: 768px) {
@@ -345,16 +452,109 @@
             .advanced-options button {
                 min-width: auto;
             }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="root"></div>
-    
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script type="text/babel" src="app.js"></script>
+    <div class="container">
+        <div class="header">
+            <div class="language-switch">
+                <button class="lang-btn active" onclick="zeroxEnhanced.switchLanguage('ar')">🌐 العربية</button>
+                <button class="lang-btn" onclick="zeroxEnhanced.switchLanguage('en')">🌐 English</button>
+            </div>
+            <h1>مدافع الأمن السيبراني</h1>
+            <p>لعبة تعليمية عن الأمن السيبراني — فريق Zerox</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #64748b;">تصميم: المهندس حيدر الجنابي</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="content-area">
+                <div class="card">
+                    <h3>أهلاً بك أيها المدافع 🛡️</h3>
+                    <p style="color: #94a3b8; margin-bottom: 20px;">احمِ الحسابات وتعلم أساسيات الحماية عبر أسئلة قصيرة وتحديات سريعة.</p>
+                    
+                    <div class="advanced-options">
+                        <button>🎮 ابدأ اللعبة</button>
+                        <button>📖 كيف تُلعب</button>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <h4>اختر مستوى:</h4>
+                        <div class="advanced-options">
+                            <button>🟢 سهلة</button>
+                            <button>🟡 متوسطة</button>
+                            <button>🔴 صعبة</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="advanced-section">
+                    <div class="card">
+                        <h3>🎯 الوضع المتقدم</h3>
+                        <p style="color: #94a3b8; margin-bottom: 15px;">استكشف ميزات إضافية وأسئلة متقدمة</p>
+                        <div class="advanced-options">
+                            <button onclick="zeroxEnhanced.startAdvancedQuestions()">
+                                🚀 الأسئلة المتقدمة
+                            </button>
+                            <button onclick="zeroxEnhanced.startDailyChallenge()">
+                                🏆 التحديات اليومية
+                            </button>
+                            <button onclick="zeroxEnhanced.showLeaderboard()">
+                                📊 لوحة المتصدرين
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="card">
+                    <h3>📈 التقدم</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 10px;">مستوى واحد = 5 أسئلة</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 60%;"></div>
+                    </div>
+                    <p style="text-align: center; font-size: 0.9rem;">السؤال 3 من 5</p>
+                </div>
+                
+                <div class="card">
+                    <h3>🎯 مستوى اللعبة</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem; margin: 10px 0;">اختر مستوى قبل البدء</p>
+                    <div style="display: flex; gap: 10px;">
+                        <button style="flex: 1; background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); padding: 8px; border-radius: 8px;">سهل</button>
+                        <button style="flex: 1; background: rgba(234, 179, 8, 0.2); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.3); padding: 8px; border-radius: 8px;">متوسط</button>
+                        <button style="flex: 1; background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); padding: 8px; border-radius: 8px;">صعب</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>⭐ سجل اللعبة</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem; margin: 10px 0;">أعلى نتيجة</p>
+                    <div style="text-align: center; font-size: 2rem; font-weight: bold; color: var(--primary-color); margin: 15px 0;">1250</div>
+                    <div style="display: flex; gap: 10px;">
+                        <button style="flex: 1; background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); padding: 8px; border-radius: 8px;">🗑️ حذف السجل</button>
+                        <button style="flex: 1; background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); padding: 8px; border-radius: 8px;">📋 نسخ</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>التحدي اليومي</h3>
+                    <p style="color: #94a3b8; font-size: 0.9rem; margin: 10px 0;">اكسب 200 نقطة إضافية!</p>
+                    <button onclick="zeroxEnhanced.startDailyChallenge()" style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; width: 100%;">
+                        بدء التحدي
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- الإضافات الجديدة -->
     <script>
@@ -635,69 +835,8 @@
             }
 
             init() {
-                setTimeout(() => {
-                    this.addLanguageSwitch();
-                    this.addAdvancedSection();
-                    this.addDailyChallenge();
-                    this.updateAllTexts(); // تحديث النصوص أول مرة
-                    console.log('✅ Zerox Enhanced - تم التثبيت!');
-                }, 2000);
-            }
-
-            addLanguageSwitch() {
-                const header = document.querySelector('.header');
-                if (header) {
-                    const languageSwitch = document.createElement('div');
-                    languageSwitch.className = 'language-switch';
-                    languageSwitch.innerHTML = `
-                        <button class="lang-btn ${this.currentLanguage === 'ar' ? 'active' : ''}" onclick="zeroxEnhanced.switchLanguage('ar')">🌐 العربية</button>
-                        <button class="lang-btn ${this.currentLanguage === 'en' ? 'active' : ''}" onclick="zeroxEnhanced.switchLanguage('en')">🌐 English</button>
-                    `;
-                    header.style.position = 'relative';
-                    header.appendChild(languageSwitch);
-                }
-            }
-
-            addAdvancedSection() {
-                const mainContent = document.querySelector('.main-content');
-                if (mainContent) {
-                    const advancedSection = document.createElement('div');
-                    advancedSection.className = 'advanced-section';
-                    advancedSection.innerHTML = `
-                        <div class="card">
-                            <h3>${this.translate('advancedMode')}</h3>
-                            <p style="color: #94a3b8; margin-bottom: 15px;">${this.translate('advancedDesc')}</p>
-                            <div class="advanced-options">
-                                <button onclick="zeroxEnhanced.startAdvancedQuestions()">
-                                    ${this.translate('advancedQuestions')}
-                                </button>
-                                <button onclick="zeroxEnhanced.startDailyChallenge()">
-                                    ${this.translate('achievements')}
-                                </button>
-                                <button onclick="zeroxEnhanced.showLeaderboard()">
-                                    ${this.translate('leaderboard')}
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    mainContent.appendChild(advancedSection);
-                }
-            }
-
-            addDailyChallenge() {
-                const sidebar = document.querySelector('.sidebar');
-                if (sidebar) {
-                    const challengeCard = document.createElement('div');
-                    challengeCard.className = 'card';
-                    challengeCard.innerHTML = `
-                        <h3>${this.translate('dailyChallenge')}</h3>
-                        <p style="color: #94a3b8; font-size: 0.9rem; margin: 10px 0;">${this.translate('challengeDesc')}</p>
-                        <button onclick="zeroxEnhanced.startDailyChallenge()" style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; width: 100%;">
-                            ${this.translate('startChallenge')}
-                        </button>
-                    `;
-                    sidebar.appendChild(challengeCard);
-                }
+                this.updateAllTexts(); // تحديث النصوص أول مرة
+                console.log('✅ Zerox Enhanced - تم التثبيت!');
             }
 
             switchLanguage(lang) {
@@ -724,6 +863,32 @@
             }
 
             updateAllTexts() {
+                // تحديث الهيدر
+                const header = document.querySelector('.header');
+                if (header) {
+                    header.querySelector('h1').textContent = this.translate('title');
+                    header.querySelector('p').textContent = this.translate('subtitle');
+                    header.querySelector('p:last-child').textContent = this.translate('designer');
+                }
+
+                // تحديث النصوص في المحتوى الرئيسي
+                const welcomeCard = document.querySelector('.content-area .card:first-child');
+                if (welcomeCard) {
+                    welcomeCard.querySelector('h3').textContent = this.translate('welcome');
+                    welcomeCard.querySelector('p').textContent = this.translate('welcomeDesc');
+                    
+                    const buttons = welcomeCard.querySelectorAll('.advanced-options button');
+                    if (buttons[0]) buttons[0].textContent = this.translate('startGame');
+                    if (buttons[1]) buttons[1].textContent = this.translate('howToPlay');
+                    
+                    welcomeCard.querySelector('h4').textContent = this.translate('chooseLevel');
+                    
+                    const levelButtons = welcomeCard.querySelectorAll('.advanced-options:last-child button');
+                    if (levelButtons[0]) levelButtons[0].textContent = this.translate('easy');
+                    if (levelButtons[1]) levelButtons[1].textContent = this.translate('medium');
+                    if (levelButtons[2]) levelButtons[2].textContent = this.translate('hard');
+                }
+
                 // تحديث النصوص في الإضافات
                 const advancedSection = document.querySelector('.advanced-section');
                 if (advancedSection) {
@@ -736,12 +901,33 @@
                     if (buttons[2]) buttons[2].textContent = this.translate('leaderboard');
                 }
 
+                // تحديث الشريط الجانبي
+                const sidebarCards = document.querySelectorAll('.sidebar .card');
+                if (sidebarCards[0]) {
+                    sidebarCards[0].querySelector('h3').textContent = this.translate('progress');
+                    sidebarCards[0].querySelector('p').textContent = this.translate('levelInfo');
+                    sidebarCards[0].querySelector('p:last-child').textContent = this.translate('question') + ' 3 من 5';
+                }
+                
+                if (sidebarCards[1]) {
+                    sidebarCards[1].querySelector('h3').textContent = this.translate('gameLevel');
+                    sidebarCards[1].querySelector('p').textContent = this.translate('chooseLevelDesc');
+                }
+                
+                if (sidebarCards[2]) {
+                    sidebarCards[2].querySelector('h3').textContent = this.translate('highscore');
+                    sidebarCards[2].querySelector('p').textContent = this.translate('highscoreDesc');
+                    
+                    const buttons = sidebarCards[2].querySelectorAll('button');
+                    if (buttons[0]) buttons[0].textContent = this.translate('deleteRecord');
+                    if (buttons[1]) buttons[1].textContent = this.translate('copy');
+                }
+
                 // تحديث التحدي اليومي
-                const challengeCard = document.querySelector('.sidebar .card:last-child');
-                if (challengeCard) {
-                    challengeCard.querySelector('h3').textContent = this.translate('dailyChallenge');
-                    challengeCard.querySelector('p').textContent = this.translate('challengeDesc');
-                    challengeCard.querySelector('button').textContent = this.translate('startChallenge');
+                if (sidebarCards[3]) {
+                    sidebarCards[3].querySelector('h3').textContent = this.translate('dailyChallenge');
+                    sidebarCards[3].querySelector('p').textContent = this.translate('challengeDesc');
+                    sidebarCards[3].querySelector('button').textContent = this.translate('startChallenge');
                 }
             }
 
@@ -955,7 +1141,8 @@
             }
 
             showMessage(message, type = 'info') {
-                const oldMessage = document.querySelector('.enhanced-message')                if (oldMessage) {
+                const oldMessage = document.querySelector('.enhanced-message');
+                if (oldMessage) {
                     oldMessage.remove();
                 }
 
